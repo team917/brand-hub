@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brand Hub - One page. Your entire brand. Free. | GetNifty</title>
+<meta name="description" content="The 21-section brand hub every small business needs. Autosaves in your browser. Export to JSON or Markdown. Free forever. No signup, no server, no lock-in.">
+<meta property="og:title" content="Brand Hub - One page. Your entire brand.">
+<meta property="og:description" content="21 sections. Autosaves in your browser. Export anywhere. Free forever.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A9%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --panel: #ffffff;
+    --ink: #16181d;
+    --muted: #5b6472;
+    --line: #e2ddd2;
+    --accent: #6b3aff;
+    --accent-2: #ff7a3a;
+    --accent-soft: #ede4ff;
+    --shadow: 0 1px 0 rgba(22,24,29,.04), 0 12px 40px rgba(22,24,29,.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.55; }
+  a { color: var(--accent); }
+  img { max-width: 100%; }
+
+  header.topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(250,247,242,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topwrap { max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: inherit; }
+  .brand .mark { font-weight: 800; letter-spacing: -.02em; font-size: 20px; }
+  .brand .mark .dot { color: var(--accent); }
+  .brand .sub { color: var(--muted); font-size: 13px; }
+  .top-actions { margin-left: auto; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .top-actions a { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600; }
+  .top-actions a.cta {
+    background: var(--ink); color: #fff; padding: 9px 14px; border-radius: 8px;
+  }
+
+  .hero { max-width: 1120px; margin: 0 auto; padding: 64px 24px 40px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-soft); color: #4b1fbf; border: 1px solid #d9c8ff;
+    padding: 5px 11px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    margin-bottom: 22px;
+  }
+  h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.03; letter-spacing: -.03em; margin: 0 0 22px; font-weight: 800; }
+  h1 .accent { color: var(--accent); }
+  h1 .strike { color: var(--muted); text-decoration: line-through; font-weight: 500; }
+  .lead { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0 0 32px; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 22px; border-radius: 10px; font-weight: 700; font-size: 16px;
+    text-decoration: none; border: 1px solid transparent; cursor: pointer;
+    transition: transform .1s ease, box-shadow .15s ease;
+  }
+  .btn.primary { background: var(--ink); color: #fff; box-shadow: 0 6px 18px rgba(22,24,29,.18); }
+  .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(22,24,29,.22); }
+  .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn.ghost:hover { border-color: var(--ink); }
+  .fine { color: var(--muted); font-size: 13px; margin-top: 14px; }
+  .fine strong { color: var(--ink); }
+
+  .screenshot {
+    max-width: 1120px; margin: 24px auto 0; padding: 0 24px;
+  }
+  .screenshot .frame {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px; box-shadow: var(--shadow); overflow: hidden;
+    position: relative;
+  }
+  .screenshot .frame::before {
+    content: ""; position: absolute; top: 12px; left: 16px;
+    width: 46px; height: 10px;
+    background:
+      radial-gradient(circle at 5px 5px, #ff5f57 0 4px, transparent 5px),
+      radial-gradient(circle at 21px 5px, #febc2e 0 4px, transparent 5px),
+      radial-gradient(circle at 37px 5px, #28c840 0 4px, transparent 5px);
+  }
+  .screenshot .frame .body { padding-top: 20px; }
+  .fake-nav {
+    display: grid; grid-template-columns: 200px 1fr; gap: 20px;
+  }
+  .fake-nav ol { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+  .fake-nav ol li { padding: 6px 10px; border-radius: 6px; color: var(--muted); }
+  .fake-nav ol li.active { background: var(--ink); color: #fff; }
+  .fake-card { border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: #fff; }
+  .fake-card h3 { margin: 0 0 4px; font-size: 17px; }
+  .fake-card p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+  .fake-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fake-field { display: flex; flex-direction: column; gap: 4px; }
+  .fake-field label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .fake-field .inp { height: 32px; background: #fafafa; border: 1px solid var(--line); border-radius: 6px; }
+  .fake-field .inp.filled { background: #fff; border-color: #c8d5c8; }
+  @media (max-width: 720px) {
+    .fake-nav { grid-template-columns: 1fr; }
+    .fake-nav ol { flex-direction: row; overflow-x: auto; }
+  }
+
+  section.section { max-width: 1120px; margin: 0 auto; padding: 72px 24px; }
+  section.section h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.02em; margin: 0 0 12px; font-weight: 800; }
+  section.section .lede { color: var(--muted); font-size: 17px; max-width: 720px; margin: 0 0 32px; }
+
+  .why-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+  @media (max-width: 800px) { .why-grid { grid-template-columns: 1fr; } }
+  .why-card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px;
+  }
+  .why-card .icon { font-size: 26px; margin-bottom: 10px; }
+  .why-card h3 { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
+  .why-card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+  .sections-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px;
+  }
+  @media (max-width: 800px) { .sections-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 500px) { .sections-grid { grid-template-columns: 1fr; } }
+  .section-chip {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; display: flex; align-items: baseline; gap: 12px;
+  }
+  .section-chip .num { font-family: ui-monospace, monospace; font-size: 12.5px; color: var(--muted); font-weight: 700; }
+  .section-chip .name { font-size: 14.5px; font-weight: 600; }
+
+  .how-list {
+    display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; margin-top: 8px;
+  }
+  @media (max-width: 900px) { .how-list { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 500px) { .how-list { grid-template-columns: 1fr; } }
+  .step {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px;
+  }
+  .step .num { font-family: ui-monospace, monospace; font-size: 13px; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .step h4 { margin: 0 0 6px; font-size: 16px; }
+  .step p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .final-cta {
+    background: var(--ink); color: #fff; border-radius: 20px; padding: 56px 40px;
+    text-align: center; margin: 40px 0;
+  }
+  .final-cta h2 { color: #fff; font-size: clamp(28px, 4vw, 42px); margin: 0 0 12px; }
+  .final-cta p { color: #b8bcc7; font-size: 17px; max-width: 520px; margin: 0 auto 24px; }
+  .final-cta .btn.primary { background: #fff; color: var(--ink); }
+  .final-cta .fine { color: #8a90a0; }
+  .final-cta .fine strong { color: #fff; }
+
+  footer.foot {
+    max-width: 1120px; margin: 0 auto; padding: 32px 24px 60px;
+    color: var(--muted); font-size: 13px;
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+  }
+  footer.foot a { color: var(--muted); text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topwrap">
+    <a class="brand" href="/">
+      <span class="mark">Brand Hub<span class="dot">.</span></span>
+      <span class="sub">by GetNifty</span>
+    </a>
+    <div class="top-actions">
+      <a href="#what">What</a>
+      <a href="#sections">Sections</a>
+      <a href="#how">How</a>
+      <a class="cta" href="./hub.html">Open the hub</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <span class="eyebrow">Free. No signup. No lock-in.</span>
+  <h1>
+    Your entire brand.<br>
+    One page.<br>
+    <span class="accent">Not</span> <span class="strike">10 Google Docs</span>.
+  </h1>
+  <p class="lead">
+    Small businesses lose brand consistency to scattered notes: colors in one doc, mission in another, service list in a spreadsheet, keywords in a Notion page nobody opens. Brand Hub puts all 21 pieces on one autosaving page. Fill what you know. Skip what you don't. Export when you're ready.
+  </p>
+  <div class="cta-row">
+    <a class="btn primary" href="./hub.html">Open the hub &rarr;</a>
+    <a class="btn ghost" href="#sections">See the 21 sections</a>
+  </div>
+  <p class="fine"><strong>Runs entirely in your browser.</strong> No account. Nothing sent to a server. Export JSON or Markdown to back up or share.</p>
+</div>
+
+<div class="screenshot">
+  <div class="frame">
+    <div class="body">
+      <div class="fake-nav">
+        <ol>
+          <li>1. Business Identity</li>
+          <li class="active">2. Owner &amp; Team</li>
+          <li>3. Services / Products</li>
+          <li>4. Service Area</li>
+          <li>5. Brand Voice</li>
+          <li>6. Target Customers</li>
+          <li>7. Competitors</li>
+          <li>&hellip;</li>
+        </ol>
+        <div class="fake-card">
+          <h3>2. Owner &amp; Team</h3>
+          <p>The humans behind the brand. Author bios and profile info pull from here.</p>
+          <div class="fake-grid">
+            <div class="fake-field"><label>Owner name</label><div class="inp filled"></div></div>
+            <div class="fake-field"><label>Owner title</label><div class="inp filled"></div></div>
+            <div class="fake-field"><label>Certifications</label><div class="inp"></div></div>
+            <div class="fake-field"><label>Years in trade</label><div class="inp filled"></div></div>
+            <div class="fake-field"><label>Email</label><div class="inp filled"></div></div>
+            <div class="fake-field"><label>Cell</label><div class="inp"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="what">
+  <h2>Why one page?</h2>
+  <p class="lede">Because ten Notion pages, a Google Doc, a stale Trello board, and a Figma frame is not a system. It's a scavenger hunt. Every time you launch a page, run an ad, or brief a freelancer, someone rebuilds the answer from scratch.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="icon">&#128193;</div>
+      <h3>One source of truth</h3>
+      <p>Legal name, phone, service area, colors, tone, target customer. If it's asked twice a week, it lives here. Every page, ad, and email traces back to this.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">&#9997;</div>
+      <h3>Fill it as you go</h3>
+      <p>Every field autosaves. Come back tomorrow. Come back next week. Nothing breaks. Nothing resets.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">&#128228;</div>
+      <h3>Export when ready</h3>
+      <p>Download as JSON to back up, or Markdown to hand to your marketer, SEO agency, or content writer. They stop asking you the same 40 questions.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sections">
+  <h2>What's on the page</h2>
+  <p class="lede">21 sections. Each one a lever you already know matters but keep meaning to write down. Filled out, this replaces a stack of onboarding docs.</p>
+  <div class="sections-grid">
+    <div class="section-chip"><span class="num">01</span><span class="name">Business Identity</span></div>
+    <div class="section-chip"><span class="num">02</span><span class="name">Owner &amp; Team</span></div>
+    <div class="section-chip"><span class="num">03</span><span class="name">Services / Products</span></div>
+    <div class="section-chip"><span class="num">04</span><span class="name">Service Area</span></div>
+    <div class="section-chip"><span class="num">05</span><span class="name">Brand Voice &amp; Positioning</span></div>
+    <div class="section-chip"><span class="num">06</span><span class="name">Target Customers (ICP)</span></div>
+    <div class="section-chip"><span class="num">07</span><span class="name">Competitors</span></div>
+    <div class="section-chip"><span class="num">08</span><span class="name">Differentiators</span></div>
+    <div class="section-chip"><span class="num">09</span><span class="name">SEO Keywords</span></div>
+    <div class="section-chip"><span class="num">10</span><span class="name">GEO / AI Search</span></div>
+    <div class="section-chip"><span class="num">11</span><span class="name">Content Pillars</span></div>
+    <div class="section-chip"><span class="num">12</span><span class="name">Website Structure</span></div>
+    <div class="section-chip"><span class="num">13</span><span class="name">Google Business Profile</span></div>
+    <div class="section-chip"><span class="num">14</span><span class="name">Local Services Ads</span></div>
+    <div class="section-chip"><span class="num">15</span><span class="name">Reviews &amp; Social Proof</span></div>
+    <div class="section-chip"><span class="num">16</span><span class="name">Tracking &amp; KPIs</span></div>
+    <div class="section-chip"><span class="num">17</span><span class="name">Brand Visuals</span></div>
+    <div class="section-chip"><span class="num">18</span><span class="name">Photo &amp; Asset Library</span></div>
+    <div class="section-chip"><span class="num">19</span><span class="name">Legal &amp; Compliance</span></div>
+    <div class="section-chip"><span class="num">20</span><span class="name">Decision Log</span></div>
+    <div class="section-chip"><span class="num">21</span><span class="name">Sign-Off</span></div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <h2>How it works</h2>
+  <p class="lede">Four steps. No account. Nothing to install. Your browser does all the work.</p>
+  <div class="how-list">
+    <div class="step">
+      <div class="num">01</div>
+      <h4>Open the hub</h4>
+      <p>One click. It loads instantly. No signup, no email, no credit card.</p>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <h4>Fill what you know</h4>
+      <p>Skip anything you don't. Every keystroke autosaves to your browser.</p>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <h4>Come back anytime</h4>
+      <p>Same browser, same page - your data is right where you left it. No login flow.</p>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <h4>Export &amp; hand off</h4>
+      <p>Download JSON to back up. Or Markdown to send to your marketer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="final-cta">
+    <h2>Stop repeating yourself.</h2>
+    <p>Fill it once. Reference it forever. Free, no signup, no lock-in.</p>
+    <a class="btn primary" href="./hub.html">Open the Brand Hub &rarr;</a>
+    <p class="fine" style="margin-top:20px">Built by <strong>GetNifty</strong>. We help small businesses show up online. This hub is the onboarding worksheet we use with our own clients. Now yours to use free.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div>
+    &copy; <span id="year"></span> Brand Hub - a free tool from <a href="https://getnifty.xyz" target="_blank" rel="noopener">GetNifty</a>.
+  </div>
+  <div>
+    <a href="./hub.html">Open the hub</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://getnifty.xyz" target="_blank" rel="noopener">GetNifty</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

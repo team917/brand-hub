@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brand Hub - Your Business Source of Truth | GetNifty</title>
+<meta name="description" content="The one-page brand hub every small business needs. 21 sections. Autosaves in your browser. Export to JSON or Markdown. Free from GetNifty.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A9%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --panel: #ffffff;
+    --ink: #16181d;
+    --muted: #5b6472;
+    --line: #e2ddd2;
+    --accent: #6b3aff;
+    --accent-soft: #ede4ff;
+    --warn: #b35a1f;
+    --warn-soft: #fbeede;
+    --ok: #2f6b3a;
+    --shadow: 0 1px 0 rgba(22,24,29,.04), 0 6px 24px rgba(22,24,29,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.5; }
+  a { color: var(--accent); }
+  header.topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(250,247,242,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topwrap { max-width: 1180px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: baseline; gap: 10px; }
+  .brand a { text-decoration: none; color: inherit; display: flex; align-items: baseline; gap: 10px; }
+  .brand .mark { font-weight: 800; letter-spacing: -.02em; font-size: 18px; }
+  .brand .mark .dot { color: var(--accent); }
+  .brand .sub { color: var(--muted); font-size: 13px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-soft); color: var(--accent); border: 1px solid #d9c8ff; padding: 3px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); border-color: #f0d5b6; }
+  .top-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  button, .btn {
+    appearance: none; border: 1px solid var(--line); background: #fff; color: var(--ink);
+    padding: 8px 12px; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer;
+    transition: all .12s ease;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  button:hover, .btn:hover { border-color: var(--ink); }
+  button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+  button.primary:hover { background: #000; }
+  button.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.ghost { background: transparent; }
+
+  .layout { max-width: 1180px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 240px 1fr; gap: 24px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } nav.side { position: static; } }
+
+  nav.side { position: sticky; top: 80px; align-self: start; }
+  nav.side ol { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+  nav.side a {
+    display: block; padding: 8px 10px; border-radius: 6px; color: var(--ink); text-decoration: none;
+    font-size: 13.5px; border: 1px solid transparent;
+  }
+  nav.side a:hover { background: #fff; border-color: var(--line); }
+  nav.side a.active { background: var(--ink); color: #fff; }
+  nav.side .nav-meta { margin-top: 14px; font-size: 12px; color: var(--muted); padding: 0 10px; }
+
+  section.card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px; margin-bottom: 18px; box-shadow: var(--shadow);
+    scroll-margin-top: 90px;
+  }
+  section.card h2 { margin: 0 0 6px; font-size: 20px; letter-spacing: -.01em; }
+  section.card .lede { color: var(--muted); margin: 0 0 18px; font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .grid.cols-1 { grid-template-columns: 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 760px) { .grid, .grid.cols-3 { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 12.5px; font-weight: 600; color: var(--muted); letter-spacing: .01em; text-transform: uppercase; }
+  .field .hint { font-size: 12px; color: var(--muted); margin-top: 2px; font-weight: 400; text-transform: none; letter-spacing: 0; }
+  input[type="text"], input[type="url"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%; font: inherit; color: inherit;
+    background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px;
+    transition: border-color .12s ease, box-shadow .12s ease;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(107,58,255,.14); }
+  textarea { resize: vertical; min-height: 80px; }
+  .check { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+  .check input { margin-top: 3px; }
+  .check label { font-size: 13.5px; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: 0; }
+  .check small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+
+  .repeater { display: flex; flex-direction: column; gap: 10px; }
+  .repeater .row-item {
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: #fbf9f4;
+    display: grid; gap: 10px;
+  }
+  .repeater .row-item .grid { grid-template-columns: repeat(2, 1fr); }
+  .row-item .item-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .row-item .item-head .idx { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .row-item button.remove { padding: 4px 8px; font-size: 12px; }
+  .add-row { background: var(--accent-soft); color: var(--accent); border: 1px dashed #bfa4ff; padding: 10px; border-radius: 8px; text-align: center; cursor: pointer; font-weight: 600; font-size: 13.5px; }
+  .add-row:hover { background: #e2d3ff; }
+
+  details.spec { border: 1px solid var(--line); border-radius: 10px; padding: 0; margin-top: 10px; background: #fbf9f4; }
+  details.spec > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  details.spec > summary::-webkit-details-marker { display: none; }
+  details.spec > summary::after { content: "+"; color: var(--muted); }
+  details.spec[open] > summary::after { content: "-"; }
+  details.spec .body { padding: 0 14px 14px; }
+
+  .intro-strip {
+    display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+    background: var(--accent-soft); border: 1px solid #d9c8ff; color: #3d1a99;
+    padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; font-size: 13.5px;
+  }
+  .intro-strip strong { color: #2a0f6f; }
+  .intro-strip a { color: #4b1fbf; font-weight: 600; }
+
+  footer.foot { color: var(--muted); font-size: 12px; max-width: 1180px; margin: 0 auto 40px; padding: 0 24px; text-align: center; }
+  footer.foot a { color: var(--muted); text-decoration: underline; }
+  .toast { position: fixed; right: 20px; bottom: 20px; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 13px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 30; }
+  .toast.show { opacity: 1; }
+
+  @media print {
+    header.topbar, nav.side, .top-actions, .add-row, .row-item button.remove, footer.foot, .intro-strip { display: none !important; }
+    .layout { display: block; padding: 0; }
+    section.card { box-shadow: none; border-color: #ccc; page-break-inside: avoid; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topwrap">
+    <div class="brand">
+      <a href="./">
+        <span class="mark">Brand Hub<span class="dot">.</span></span>
+        <span class="sub">by GetNifty</span>
+      </a>
+    </div>
+    <span class="pill" id="statusPill">Autosave on</span>
+    <div class="top-actions">
+      <button class="ghost" onclick="exportJSON()">Export JSON</button>
+      <button class="ghost" onclick="exportMarkdown()">Export Markdown</button>
+      <button class="ghost" onclick="importJSON()">Import</button>
+      <button class="ghost" onclick="window.print()">Print</button>
+      <button class="ghost" onclick="resetAll()">Reset</button>
+      <button class="primary" onclick="saveNow()">Save</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <nav class="side">
+    <ol id="nav"></ol>
+    <div class="nav-meta">
+      Last saved: <span id="lastSaved">never</span><br>
+      Everything saves locally in your browser. Export JSON to back up or share.
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="intro-strip">
+      <strong>Start here.</strong> Fill what you know. Skip what you don't. Come back later. Export when you're done and send it to whoever runs your marketing - or keep it as your own single source of truth. <a href="./" target="_top">What is this?</a>
+    </div>
+
+    <section class="card" id="business" data-title="1. Business Identity">
+      <h2>1. Business Identity</h2>
+      <p class="lede">Canonical NAP and legal facts. Every citation, listing, invoice, and page pulls from here.</p>
+      <div class="grid">
+        <div class="field"><label>Legal business name</label><input type="text" data-k="biz.legalName" placeholder="e.g. Acme Roofing LLC"></div>
+        <div class="field"><label>Brand / DBA name</label><input type="text" data-k="biz.brandName" placeholder="How customers know you"></div>
+        <div class="field"><label>Primary domain</label><input type="url" data-k="biz.domain" placeholder="https://yourdomain.com"></div>
+        <div class="field"><label>Year founded</label><input type="number" data-k="biz.founded" placeholder="YYYY"></div>
+        <div class="field"><label>Primary phone (tracked)</label><input type="tel" data-k="biz.phone" placeholder="(555) 555-1234"></div>
+        <div class="field"><label>Secondary phone (forwarding)</label><input type="tel" data-k="biz.phone2"></div>
+        <div class="field"><label>Primary email</label><input type="email" data-k="biz.email"></div>
+        <div class="field"><label>Booking / quote email</label><input type="email" data-k="biz.bookingEmail"></div>
+        <div class="field"><label>Street address</label><input type="text" data-k="biz.street"></div>
+        <div class="field"><label>City, State, ZIP</label><input type="text" data-k="biz.citystatezip"></div>
+        <div class="field"><label>Lat / Lng (for schema)</label><input type="text" data-k="biz.geo" placeholder="29.4241, -98.4936"></div>
+        <div class="field"><label>Time zone</label><input type="text" data-k="biz.tz" placeholder="America/Chicago"></div>
+        <div class="field"><label>Hours - weekdays</label><input type="text" data-k="biz.hoursWeekday" placeholder="Mon-Fri 8:00-17:00"></div>
+        <div class="field"><label>Hours - weekend / emergency</label><input type="text" data-k="biz.hoursWeekend"></div>
+        <div class="field"><label>License number(s)</label><input type="text" data-k="biz.license" placeholder="If regulated trade"></div>
+        <div class="field"><label>Insurance carrier + policy #</label><input type="text" data-k="biz.insurance"></div>
+        <div class="field"><label>EIN / tax ID (internal only)</label><input type="text" data-k="biz.ein"></div>
+        <div class="field"><label>BBB profile URL</label><input type="url" data-k="biz.bbb"></div>
+      </div>
+    </section>
+
+    <section class="card" id="owner" data-title="2. Owner & Team">
+      <h2>2. Owner & Team</h2>
+      <p class="lede">The humans behind the brand. Author bios and profile info pull from here.</p>
+      <div class="grid">
+        <div class="field"><label>Owner name</label><input type="text" data-k="owner.name"></div>
+        <div class="field"><label>Owner title</label><input type="text" data-k="owner.title" placeholder="Owner / Founder"></div>
+        <div class="field"><label>Owner certifications</label><input type="text" data-k="owner.certs" placeholder="Industry-specific certs, licenses"></div>
+        <div class="field"><label>Years in trade / industry</label><input type="number" data-k="owner.years"></div>
+        <div class="field"><label>Owner email</label><input type="email" data-k="owner.email"></div>
+        <div class="field"><label>Owner cell</label><input type="tel" data-k="owner.cell"></div>
+        <div class="field"><label>Best contact window</label><input type="text" data-k="owner.contactHours"></div>
+        <div class="field"><label>Decision authority</label><select data-k="owner.authority"><option value="">choose</option><option>Final say</option><option>Needs spouse / partner sign-off</option><option>Office manager gates</option></select></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Founder story (50-120 words, for About page + profile bios)</label><textarea data-k="owner.story" rows="5" placeholder="Why you started the company, what makes you different, what you care about. Customer-facing, plain language."></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Team roster (one per line: Name - Role - Cert)</label><textarea data-k="owner.team" rows="4"></textarea></div>
+    </section>
+
+    <section class="card" id="services" data-title="3. Services / Products">
+      <h2>3. Services or Products Offered</h2>
+      <p class="lede">Authoritative list. Drives sitemap, listings, schema, and ad groups.</p>
+      <div class="repeater" id="rep-services"></div>
+      <div class="add-row" onclick="addRow('services')">+ Add service or product</div>
+      <details class="spec" open>
+        <summary>Entry spec</summary>
+        <div class="body" style="font-size:13px;color:var(--muted)">
+          Name, slug (URL), price range, typical duration, gear required, certifications required, season, 1-line summary, 3-5 bullet outcomes. Keep slugs lowercase-with-hyphens.
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="area" data-title="4. Service Area">
+      <h2>4. Service Area</h2>
+      <p class="lede">Cities, neighborhoods, ZIPs you cover. Drives location pages and map listings.</p>
+      <div class="grid">
+        <div class="field"><label>Primary city</label><input type="text" data-k="area.primaryCity"></div>
+        <div class="field"><label>Travel radius (miles)</label><input type="number" data-k="area.radius"></div>
+        <div class="field"><label>Travel-fee threshold (miles)</label><input type="number" data-k="area.feeMiles"></div>
+        <div class="field"><label>Travel fee structure</label><input type="text" data-k="area.feeStructure"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Cities served (one per line)</label><textarea data-k="area.cities" rows="6"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Top neighborhoods (one per line, used for high-value location pages)</label><textarea data-k="area.neighborhoods" rows="6"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>ZIP codes served (comma-separated)</label><textarea data-k="area.zips" rows="3"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Areas you DO NOT serve / decline politely</label><textarea data-k="area.excluded" rows="3"></textarea></div>
+    </section>
+
+    <section class="card" id="voice" data-title="5. Brand Voice & Positioning">
+      <h2>5. Brand Voice & Positioning</h2>
+      <p class="lede">How you sound. Used by every page, ad, email, and review reply.</p>
+      <div class="field"><label>One-sentence positioning ("We help X do Y, unlike Z")</label><textarea data-k="voice.position" rows="2"></textarea></div>
+      <div class="grid" style="margin-top:14px">
+        <div class="field"><label>Voice attributes (pick 3)</label><input type="text" data-k="voice.attrs" placeholder="trustworthy, direct, neighborly"></div>
+        <div class="field"><label>Things you never say</label><input type="text" data-k="voice.never" placeholder="cheap, world-class, unbeatable"></div>
+        <div class="field"><label>Reading level target</label><select data-k="voice.reading"><option>6th grade</option><option>8th grade</option><option>10th grade</option></select></div>
+        <div class="field"><label>Point of view</label><select data-k="voice.pov"><option>We / our team</option><option>I / owner-led</option></select></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Tagline options (one per line)</label><textarea data-k="voice.taglines" rows="4"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Boilerplate (50-80 words used at end of press releases, About page)</label><textarea data-k="voice.boilerplate" rows="4"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Elevator pitch (30 sec spoken)</label><textarea data-k="voice.pitch" rows="3"></textarea></div>
+    </section>
+
+    <section class="card" id="icp" data-title="6. Target Customers (ICP)">
+      <h2>6. Target Customers (ICP)</h2>
+      <p class="lede">Who you are writing for. Drives page hierarchy, photo selection, ad audiences.</p>
+      <div class="repeater" id="rep-icp"></div>
+      <div class="add-row" onclick="addRow('icp')">+ Add customer segment</div>
+    </section>
+
+    <section class="card" id="competitors" data-title="7. Competitors">
+      <h2>7. Competitive Landscape</h2>
+      <p class="lede">Who shows up when your prospects search. You position against these.</p>
+      <div class="repeater" id="rep-competitors"></div>
+      <div class="add-row" onclick="addRow('competitors')">+ Add competitor</div>
+      <div class="field" style="margin-top:14px"><label>Map-pack dominators (top 3 in local pack today)</label><textarea data-k="comp.mapPack" rows="3" placeholder="Competitor A - review count&#10;..."></textarea></div>
+    </section>
+
+    <section class="card" id="differentiators" data-title="8. Differentiators">
+      <h2>8. Differentiators</h2>
+      <p class="lede">The honest "why us" list. No fluff. Each item must be defensible.</p>
+      <div class="field"><label>Top 5 differentiators (one per line)</label><textarea data-k="diff.list" rows="6" placeholder="What you actually do that competitors don't, said plainly."></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Guarantees / promises</label><textarea data-k="diff.guarantees" rows="3"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Signature offer (lead gen hook)</label><textarea data-k="diff.offer" rows="3" placeholder="Free on-site quote within 24 hours, no pressure."></textarea></div>
+    </section>
+
+    <section class="card" id="seo" data-title="9. SEO Keywords">
+      <h2>9. SEO Keywords</h2>
+      <p class="lede">Target term universe. Pulls into URL plan, on-page briefs, and reporting.</p>
+      <div class="grid">
+        <div class="field"><label>Primary money keyword</label><input type="text" data-k="seo.primary" placeholder="e.g. roofer austin tx"></div>
+        <div class="field"><label>Primary location modifier</label><input type="text" data-k="seo.location" placeholder="austin tx"></div>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="field"><label>Tier 1 - commercial / money terms (one per line)</label><textarea data-k="seo.tier1" rows="8"></textarea></div>
+        <div class="field"><label>Tier 2 - service + neighborhood (one per line)</label><textarea data-k="seo.tier2" rows="8"></textarea></div>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="field"><label>Tier 3 - informational / blog (one per line)</label><textarea data-k="seo.tier3" rows="8"></textarea></div>
+        <div class="field"><label>Negative / avoid keywords (don't rank for these)</label><textarea data-k="seo.negative" rows="8"></textarea></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Featured snippet targets (questions to win position 0)</label><textarea data-k="seo.snippets" rows="4"></textarea></div>
+    </section>
+
+    <section class="card" id="geo" data-title="10. GEO / AI Search">
+      <h2>10. GEO - AI Search Optimization</h2>
+      <p class="lede">How you get cited by ChatGPT, Perplexity, Google AI Overviews, Gemini. Different rules than classic SEO.</p>
+      <div class="field"><label>Canonical facts you want AI engines to associate with your brand (one per line, evidence-backed)</label><textarea data-k="geo.facts" rows="6"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Statistics & data points to cite (with sources)</label><textarea data-k="geo.stats" rows="5"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Third-party mentions to pursue (citation farm)</label><textarea data-k="geo.mentions" rows="5" placeholder="Trade associations, industry directories, local chamber, review sites, local papers."></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Q&A pairs to seed (Reddit, Quora, GBP Q&A)</label><textarea data-k="geo.qa" rows="6" placeholder="Q: ...&#10;A: ..."></textarea></div>
+    </section>
+
+    <section class="card" id="content" data-title="11. Content Pillars">
+      <h2>11. Content Pillars & Topics</h2>
+      <p class="lede">Pillar pages anchor topical authority. Cluster posts support them with internal links.</p>
+      <div class="repeater" id="rep-pillars"></div>
+      <div class="add-row" onclick="addRow('pillars')">+ Add content pillar</div>
+      <details class="spec" style="margin-top:14px">
+        <summary>Editorial cadence</summary>
+        <div class="body">
+          <div class="grid">
+            <div class="field"><label>Posts per month</label><input type="number" data-k="content.cadence" value="2"></div>
+            <div class="field"><label>Min word count</label><input type="number" data-k="content.minWords" value="1200"></div>
+            <div class="field"><label>Author byline</label><input type="text" data-k="content.author"></div>
+            <div class="field"><label>Publish day</label><input type="text" data-k="content.publishDay" placeholder="Tuesdays"></div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="sitemap" data-title="12. Website Structure">
+      <h2>12. Website Structure</h2>
+      <p class="lede">Page-by-page plan for the site. Slugs are final and link-stable.</p>
+      <div class="grid cols-3">
+        <div class="field"><label>Stack preference</label><select data-k="site.stack"><option>Astro static</option><option>Next.js</option><option>WordPress</option><option>Webflow</option><option>Squarespace</option><option>Shopify</option><option>Custom HTML</option><option>Not sure</option></select></div>
+        <div class="field"><label>Hosting</label><input type="text" data-k="site.host" placeholder="Netlify / Vercel / current host"></div>
+        <div class="field"><label>CMS for blog</label><input type="text" data-k="site.cms"></div>
+      </div>
+      <div class="repeater" style="margin-top:14px" id="rep-pages"></div>
+      <div class="add-row" onclick="addRow('pages')">+ Add page</div>
+      <details class="spec" open style="margin-top:14px">
+        <summary>Default page set (will prefill on first load)</summary>
+        <div class="body" style="font-size:13px;color:var(--muted)">
+          /, /services/, /services/[service]/, /service-areas/, /service-areas/[city]/, /about/, /reviews/, /gallery/, /contact/, /quote/, /blog/, /blog/[slug]/.
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="gbp" data-title="13. Google Business Profile">
+      <h2>13. Google Business Profile</h2>
+      <p class="lede">GBP is the single biggest lead lever for local businesses. Treat as primary surface.</p>
+      <div class="grid">
+        <div class="field"><label>GBP listing URL</label><input type="url" data-k="gbp.url"></div>
+        <div class="field"><label>Manager Gmail</label><input type="email" data-k="gbp.manager"></div>
+        <div class="field"><label>Primary category</label><input type="text" data-k="gbp.primary"></div>
+        <div class="field"><label>Secondary categories (comma-sep)</label><input type="text" data-k="gbp.secondary"></div>
+        <div class="field"><label>Service area or storefront?</label><select data-k="gbp.type"><option>Service-area (no walk-ins)</option><option>Hybrid</option><option>Storefront</option></select></div>
+        <div class="field"><label>Current review count</label><input type="number" data-k="gbp.reviews"></div>
+        <div class="field"><label>Current rating</label><input type="number" step="0.1" data-k="gbp.rating"></div>
+        <div class="field"><label>90-day review target</label><input type="number" data-k="gbp.target"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Posts cadence (per week)</label><input type="number" data-k="gbp.posts" value="2"></div>
+      <div class="field" style="margin-top:14px"><label>Photo upload cadence</label><input type="text" data-k="gbp.photos" placeholder="e.g. 5 per week, geo-tagged, mix of team + finished work"></div>
+    </section>
+
+    <section class="card" id="lsa" data-title="14. Local Services Ads (LSA)">
+      <h2>14. Local Services Ads + Google Guaranteed</h2>
+      <p class="lede">Where applicable: LSA is often the fastest paid channel for local trades.</p>
+      <div class="grid">
+        <div class="field"><label>LSA application status</label><select data-k="lsa.status"><option>Not applicable</option><option>Not started</option><option>Documents collected</option><option>Submitted</option><option>Under review</option><option>Approved</option><option>Live</option></select></div>
+        <div class="field"><label>Google Guaranteed status</label><select data-k="lsa.gg"><option>N/A</option><option>Pending</option><option>Approved</option></select></div>
+        <div class="field"><label>Weekly budget</label><input type="text" data-k="lsa.budget"></div>
+        <div class="field"><label>Target cost per lead</label><input type="text" data-k="lsa.cpl"></div>
+        <div class="field"><label>Job types enabled</label><input type="text" data-k="lsa.jobs"></div>
+        <div class="field"><label>Hours bid</label><input type="text" data-k="lsa.hours"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>LSA docs checklist</label><div class="grid cols-3" style="margin-top:6px">
+        <div class="check"><input type="checkbox" data-k="lsa.doc1"><label>Business license uploaded</label></div>
+        <div class="check"><input type="checkbox" data-k="lsa.doc2"><label>Liability insurance COI</label></div>
+        <div class="check"><input type="checkbox" data-k="lsa.doc3"><label>Owner background check</label></div>
+        <div class="check"><input type="checkbox" data-k="lsa.doc4"><label>Crew background checks</label></div>
+        <div class="check"><input type="checkbox" data-k="lsa.doc5"><label>W9 / EIN verified</label></div>
+        <div class="check"><input type="checkbox" data-k="lsa.doc6"><label>Service area confirmed</label></div>
+      </div></div>
+    </section>
+
+    <section class="card" id="reviews" data-title="15. Reviews & Social Proof">
+      <h2>15. Reviews & Social Proof</h2>
+      <p class="lede">Review velocity is one of the biggest levers. Wire it to invoicing so it becomes automatic.</p>
+      <div class="grid">
+        <div class="field"><label>Review request channel</label><select data-k="rev.channel"><option>SMS after job</option><option>Email after job</option><option>QR card handoff</option><option>Multi-touch</option></select></div>
+        <div class="field"><label>Tool / platform</label><input type="text" data-k="rev.tool" placeholder="NiceJob, Podium, manual, etc."></div>
+        <div class="field"><label>Send delay after job complete</label><input type="text" data-k="rev.delay" placeholder="2-4 hours"></div>
+        <div class="field"><label>Follow-up delay</label><input type="text" data-k="rev.followup" placeholder="3 days if no response"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Review request copy (text-after-job)</label><textarea data-k="rev.smsCopy" rows="3" placeholder="Hi {first_name}, this is {owner} from {brand}. Thanks for trusting us with the {job}. If we did right by you, a quick Google review would mean the world: {link}"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Owner reply template - 5-star</label><textarea data-k="rev.reply5" rows="3"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Owner reply template - 3-star or lower</label><textarea data-k="rev.replyLow" rows="3" placeholder="Acknowledge specifically, take it offline, name the owner, share direct phone."></textarea></div>
+    </section>
+
+    <section class="card" id="tracking" data-title="16. Tracking & KPIs">
+      <h2>16. Tracking & KPIs</h2>
+      <p class="lede">What gets measured. Reporting dashboards pull from this.</p>
+      <div class="grid cols-3">
+        <div class="field"><label>Call tracking number</label><input type="tel" data-k="track.callRail"></div>
+        <div class="field"><label>GA4 property ID</label><input type="text" data-k="track.ga4"></div>
+        <div class="field"><label>Google Tag Manager ID</label><input type="text" data-k="track.gtm"></div>
+        <div class="field"><label>Search Console verified</label><select data-k="track.gsc"><option>No</option><option>Yes</option></select></div>
+        <div class="field"><label>Microsoft Clarity ID</label><input type="text" data-k="track.clarity"></div>
+        <div class="field"><label>Form submission destination</label><input type="email" data-k="track.formTo"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Monthly KPI targets</label><textarea data-k="track.kpis" rows="6" placeholder="Qualified phone calls: X/mo&#10;Form leads: X/mo&#10;Reviews added: X/mo&#10;Rating maintained at 4.9+&#10;Map pack appearance for primary keyword: top 3"></textarea></div>
+    </section>
+
+    <section class="card" id="visuals" data-title="17. Brand Visuals">
+      <h2>17. Brand Visuals</h2>
+      <p class="lede">Colors, fonts, logo files. Used by every page, social post, ad, and invoice.</p>
+      <div class="grid cols-3">
+        <div class="field"><label>Primary color (hex)</label><input type="text" data-k="vis.colorP" placeholder="#1f4f2e"></div>
+        <div class="field"><label>Secondary color (hex)</label><input type="text" data-k="vis.colorS"></div>
+        <div class="field"><label>Accent color (hex)</label><input type="text" data-k="vis.colorA"></div>
+        <div class="field"><label>Heading font</label><input type="text" data-k="vis.fontH" placeholder="Fraunces / Inter / etc."></div>
+        <div class="field"><label>Body font</label><input type="text" data-k="vis.fontB"></div>
+        <div class="field"><label>Mono / numbers font</label><input type="text" data-k="vis.fontM"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Logo files (links to Drive / Dropbox)</label><textarea data-k="vis.logos" rows="3" placeholder="SVG primary - URL&#10;PNG horizontal - URL&#10;Favicon - URL"></textarea></div>
+      <div class="field" style="margin-top:14px"><label>Photography style</label><textarea data-k="vis.photo" rows="3" placeholder="Real team, real workspace, real customers. Natural light. No stock."></textarea></div>
+    </section>
+
+    <section class="card" id="assets" data-title="18. Photo & Asset Library">
+      <h2>18. Photo & Asset Library</h2>
+      <p class="lede">Where the source files live. Anything used on the public site should be tracked here.</p>
+      <div class="grid">
+        <div class="field"><label>Google Drive folder URL</label><input type="url" data-k="assets.drive"></div>
+        <div class="field"><label>Dropbox / iCloud folder URL</label><input type="url" data-k="assets.dropbox"></div>
+        <div class="field"><label>Stock photo licenses held</label><input type="text" data-k="assets.stock"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Photo categories needed (one per line)</label><textarea data-k="assets.cats" rows="6" placeholder="Team on the job (3+ shots)&#10;Owner portrait (2 shots, headshot + working)&#10;Before/after (5 pairs)&#10;Equipment / workspace (5 shots)&#10;Customer handoff moment (3 shots)"></textarea></div>
+    </section>
+
+    <section class="card" id="legal" data-title="19. Legal & Compliance">
+      <h2>19. Legal & Compliance</h2>
+      <p class="lede">Boring but load-bearing. Required for LSA, BBB, and contract work.</p>
+      <div class="grid">
+        <div class="field"><label>Liability coverage amount</label><input type="text" data-k="legal.liability" placeholder="$1M / $2M aggregate"></div>
+        <div class="field"><label>Workers comp coverage</label><input type="text" data-k="legal.workers"></div>
+        <div class="field"><label>Commercial auto coverage</label><input type="text" data-k="legal.auto"></div>
+        <div class="field"><label>COI on file (with whom)</label><input type="text" data-k="legal.coi"></div>
+        <div class="field"><label>Privacy policy URL</label><input type="url" data-k="legal.privacy"></div>
+        <div class="field"><label>Terms of service URL</label><input type="url" data-k="legal.tos"></div>
+        <div class="field"><label>ADA / accessibility statement URL</label><input type="url" data-k="legal.ada"></div>
+        <div class="field"><label>DOT number (if hauling)</label><input type="text" data-k="legal.dot"></div>
+      </div>
+    </section>
+
+    <section class="card" id="decisions" data-title="20. Decision Log">
+      <h2>20. Decision Log / Notes</h2>
+      <p class="lede">Append-only. Every meaningful call, scope change, and decision lands here with a date.</p>
+      <div class="repeater" id="rep-decisions"></div>
+      <div class="add-row" onclick="addRow('decisions')">+ Add entry</div>
+    </section>
+
+    <section class="card" id="signoff" data-title="21. Sign-Off">
+      <h2>21. Sign-Off</h2>
+      <p class="lede">This is your source of truth. From this point forward, every asset traces back to this file.</p>
+      <div class="grid">
+        <div class="field"><label>Owner / representative name</label><input type="text" data-k="sign.repName"></div>
+        <div class="field"><label>Title</label><input type="text" data-k="sign.repTitle"></div>
+        <div class="field"><label>Sign-off date</label><input type="date" data-k="sign.date"></div>
+        <div class="field"><label>Reviewed by (agency / marketer)</label><input type="text" data-k="sign.gnRep"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Approved scope statement</label><textarea data-k="sign.scope" rows="3" placeholder="Any work outside this hub requires a written change order."></textarea></div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot">
+  Brand Hub is a free tool from <a href="https://getnifty.xyz" target="_blank" rel="noopener">GetNifty</a>. Everything is stored locally in your browser. No server, no signup. Export JSON to back up or share.
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY = "getnifty-brand-hub-v1";
+
+const REPEATER_SCHEMAS = {
+  services: {
+    fields: [
+      { k: "name",       label: "Name",                        type: "text",     ph: "e.g. Roof replacement" },
+      { k: "slug",       label: "URL slug",                    type: "text",     ph: "roof-replacement" },
+      { k: "priceRange", label: "Price range",                 type: "text",     ph: "$X - $Y" },
+      { k: "duration",   label: "Typical duration",            type: "text",     ph: "e.g. 2-4 hrs, 1-2 days" },
+      { k: "summary",    label: "1-line summary",              type: "text", full:true },
+      { k: "outcomes",   label: "Outcomes (3-5 bullets)",      type: "textarea", full:true },
+      { k: "cert",       label: "Certifications required",     type: "text" },
+      { k: "season",     label: "Best season / timing",        type: "text" }
+    ],
+    default: [
+      { name: "" },
+      { name: "" },
+      { name: "" }
+    ]
+  },
+  icp: {
+    fields: [
+      { k: "name",      label: "Segment name",          type: "text",     ph: "e.g. Suburban homeowner, 40-60, mature home" },
+      { k: "trigger",   label: "Buying trigger",        type: "text",     ph: "What just happened that made them search" },
+      { k: "concern",   label: "Primary concern",       type: "text" },
+      { k: "spend",     label: "Typical job value",     type: "text",     ph: "$X - $Y" },
+      { k: "where",     label: "Where they search",     type: "text",     ph: "Google, Nextdoor, neighbor referrals" },
+      { k: "objection", label: "Top objection",         type: "textarea", full:true }
+    ],
+    default: [ {}, {}, {} ]
+  },
+  competitors: {
+    fields: [
+      { k: "name",      label: "Competitor",         type: "text" },
+      { k: "url",       label: "Website",            type: "url" },
+      { k: "reviews",   label: "GBP reviews",        type: "number" },
+      { k: "rating",    label: "Rating",             type: "number" },
+      { k: "strength",  label: "Their strength",     type: "textarea", full:true },
+      { k: "weakness",  label: "Their weakness",     type: "textarea", full:true }
+    ],
+    default: [ {}, {} ]
+  },
+  pillars: {
+    fields: [
+      { k: "topic",      label: "Pillar topic",                  type: "text" },
+      { k: "url",        label: "Pillar URL slug",               type: "text",     ph: "/pillar-slug/" },
+      { k: "wordCount",  label: "Target word count",             type: "number" },
+      { k: "clusters",   label: "Cluster topics (one per line)", type: "textarea", full:true }
+    ],
+    default: [ {}, {}, {} ]
+  },
+  pages: {
+    fields: [
+      { k: "slug",       label: "URL slug",                       type: "text" },
+      { k: "title",      label: "Page title (H1)",                type: "text" },
+      { k: "metaTitle",  label: "Meta title (50-60 chars)",       type: "text", full:true },
+      { k: "metaDesc",   label: "Meta description (140-160 chars)", type: "textarea", full:true },
+      { k: "kw",         label: "Primary keyword",                type: "text" },
+      { k: "intent",     label: "Search intent",                  type: "text", ph: "transactional / informational" },
+      { k: "cta",        label: "Primary CTA",                    type: "text" }
+    ],
+    default: [
+      { slug: "/",                       title: "Homepage" },
+      { slug: "/services/",              title: "Our Services" },
+      { slug: "/service-areas/",         title: "Service Areas" },
+      { slug: "/about/",                 title: "About" },
+      { slug: "/reviews/",               title: "Reviews" },
+      { slug: "/gallery/",               title: "Gallery" },
+      { slug: "/contact/",               title: "Contact" },
+      { slug: "/quote/",                 title: "Request a Quote" },
+      { slug: "/blog/",                  title: "Blog" }
+    ]
+  },
+  decisions: {
+    fields: [
+      { k: "date",   label: "Date",            type: "date" },
+      { k: "who",    label: "Who",             type: "text" },
+      { k: "topic",  label: "Topic",           type: "text" },
+      { k: "note",   label: "Decision / note", type: "textarea", full:true }
+    ],
+    default: []
+  }
+};
+
+let state = load();
+init();
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return { fields: {}, repeaters: {} };
+}
+
+function save(silent) {
+  state.savedAt = new Date().toISOString();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  document.getElementById("lastSaved").textContent = new Date(state.savedAt).toLocaleString();
+  if (!silent) toast("Saved");
+}
+
+function saveNow() { save(); }
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove("show"), 1400);
+}
+
+function init() {
+  const nav = document.getElementById("nav");
+  document.querySelectorAll("section.card").forEach(s => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#" + s.id;
+    a.textContent = s.dataset.title;
+    a.dataset.target = s.id;
+    li.appendChild(a);
+    nav.appendChild(li);
+  });
+  document.querySelectorAll("nav.side a").forEach(a => {
+    a.addEventListener("click", e => {
+      document.querySelectorAll("nav.side a").forEach(x => x.classList.remove("active"));
+      a.classList.add("active");
+    });
+  });
+
+  document.querySelectorAll("[data-k]").forEach(el => {
+    const k = el.dataset.k;
+    const v = state.fields[k];
+    if (v !== undefined && v !== null) {
+      if (el.type === "checkbox") el.checked = !!v;
+      else el.value = v;
+    }
+    const ev = (el.tagName === "SELECT" || el.type === "checkbox") ? "change" : "input";
+    el.addEventListener(ev, () => {
+      state.fields[k] = el.type === "checkbox" ? el.checked : el.value;
+      debounceSave();
+    });
+  });
+
+  Object.keys(REPEATER_SCHEMAS).forEach(name => {
+    if (!state.repeaters[name]) state.repeaters[name] = JSON.parse(JSON.stringify(REPEATER_SCHEMAS[name].default || []));
+    renderRepeater(name);
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        document.querySelectorAll("nav.side a").forEach(a => {
+          a.classList.toggle("active", a.dataset.target === id);
+        });
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll("section.card").forEach(s => observer.observe(s));
+
+  if (state.savedAt) document.getElementById("lastSaved").textContent = new Date(state.savedAt).toLocaleString();
+}
+
+let _saveT;
+function debounceSave() {
+  clearTimeout(_saveT);
+  _saveT = setTimeout(() => save(true), 400);
+}
+
+function renderRepeater(name) {
+  const schema = REPEATER_SCHEMAS[name];
+  const wrap = document.getElementById("rep-" + name);
+  wrap.innerHTML = "";
+  const rows = state.repeaters[name] || [];
+  rows.forEach((row, i) => {
+    const item = document.createElement("div");
+    item.className = "row-item";
+    const head = document.createElement("div");
+    head.className = "item-head";
+    head.innerHTML = `<span class="idx">#${i+1}</span>`;
+    const rm = document.createElement("button");
+    rm.className = "remove";
+    rm.textContent = "Remove";
+    rm.onclick = () => { rows.splice(i,1); save(true); renderRepeater(name); };
+    head.appendChild(rm);
+    item.appendChild(head);
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    schema.fields.forEach(f => {
+      const fld = document.createElement("div");
+      fld.className = "field";
+      if (f.full) fld.style.gridColumn = "1 / -1";
+      const lab = document.createElement("label");
+      lab.textContent = f.label;
+      fld.appendChild(lab);
+      let inp;
+      if (f.type === "textarea") {
+        inp = document.createElement("textarea");
+        inp.rows = 3;
+      } else {
+        inp = document.createElement("input");
+        inp.type = f.type || "text";
+      }
+      inp.value = row[f.k] || "";
+      if (f.ph) inp.placeholder = f.ph;
+      inp.addEventListener("input", () => { row[f.k] = inp.value; debounceSave(); });
+      fld.appendChild(inp);
+      grid.appendChild(fld);
+    });
+    item.appendChild(grid);
+    wrap.appendChild(item);
+  });
+}
+
+function addRow(name) {
+  state.repeaters[name].push({});
+  save(true);
+  renderRepeater(name);
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const brand = (state.fields["biz.brandName"] || "brand-hub").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "brand-hub";
+  download(blob, `${brand}-${stamp()}.json`);
+  toast("Exported JSON");
+}
+
+function exportMarkdown() {
+  const f = state.fields, r = state.repeaters;
+  const brand = f["biz.brandName"] || "Your Brand";
+  const lines = [];
+  lines.push(`# ${brand} - Brand Hub`);
+  lines.push(`*Generated ${new Date().toLocaleString()}*`);
+  lines.push("");
+  document.querySelectorAll("section.card").forEach(sec => {
+    lines.push(`## ${sec.dataset.title}`);
+    sec.querySelectorAll("[data-k]").forEach(el => {
+      const k = el.dataset.k;
+      const v = el.type === "checkbox" ? (el.checked ? "yes" : "no") : (f[k] || "");
+      if (!v) return;
+      const label = el.closest(".field")?.querySelector("label")?.textContent
+                 || el.closest(".check")?.querySelector("label")?.textContent
+                 || k;
+      lines.push(`- **${label}:** ${v}`);
+    });
+    const repName = sec.querySelector("[id^='rep-']")?.id?.replace("rep-","");
+    if (repName && r[repName]?.length) {
+      const schema = REPEATER_SCHEMAS[repName];
+      r[repName].forEach((row, i) => {
+        const hasContent = schema.fields.some(fd => row[fd.k]);
+        if (!hasContent) return;
+        lines.push(`### #${i+1}`);
+        schema.fields.forEach(fd => {
+          if (row[fd.k]) lines.push(`- **${fd.label}:** ${row[fd.k]}`);
+        });
+      });
+    }
+    lines.push("");
+  });
+  const blob = new Blob([lines.join("\n")], { type: "text/markdown" });
+  const slug = brand.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "brand-hub";
+  download(blob, `${slug}-${stamp()}.md`);
+  toast("Exported Markdown");
+}
+
+function importJSON() {
+  const i = document.createElement("input");
+  i.type = "file";
+  i.accept = "application/json";
+  i.onchange = () => {
+    const file = i.files[0]; if (!file) return;
+    const r = new FileReader();
+    r.onload = () => {
+      try {
+        state = JSON.parse(r.result);
+        save();
+        location.reload();
+      } catch(e) { alert("Could not parse JSON"); }
+    };
+    r.readAsText(file);
+  };
+  i.click();
+}
+
+function resetAll() {
+  if (!confirm("Reset everything? This wipes the local copy. Export first if you want a backup.")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+function download(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 0);
+}
+
+function stamp() {
+  const d = new Date();
+  return d.toISOString().slice(0,10);
+}
+</script>
+</body>
+</html>
