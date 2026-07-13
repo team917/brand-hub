@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nifty Scope - The 5-minute AI + growth fit check | GetNifty</title>
+<meta name="description" content="20 questions. 5 minutes. We'll tell you exactly where AI, automation, web, brand, or content actually fit in your business - and what to build first. Free from GetNifty.">
+<meta property="og:title" content="Nifty Scope - Find where AI actually fits in your business">
+<meta property="og:description" content="20 questions. 5 minutes. Zero fluff. Free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A8%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --cream: #fbf6ec;
+    --ink: #16130f;
+    --muted: #6b6559;
+    --line: #e6dfd0;
+    --sunset: #ff5a1f;
+    --sunset-soft: #ffe4d6;
+    --purple: #6b3aff;
+    --purple-soft: #ede4ff;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: var(--cream); color: var(--ink);
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  body { overflow-x: hidden; }
+  a { color: var(--ink); }
+  ::selection { background: var(--sunset); color: #fff; }
+
+  /* Dotted grid background */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1;
+    background-image: radial-gradient(circle, rgba(22,19,15,.08) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+  }
+
+  /* Warm sunset blobs */
+  .blob {
+    position: fixed; z-index: -2; border-radius: 50%; filter: blur(80px); opacity: .4;
+    pointer-events: none;
+  }
+  .blob.a { top: -140px; right: -100px; width: 460px; height: 460px; background: radial-gradient(circle, #ffb59a, transparent 65%); }
+  .blob.b { bottom: -220px; left: -140px; width: 520px; height: 520px; background: radial-gradient(circle, #e0d0ff, transparent 65%); }
+
+  header.topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(251,246,236,.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(230,223,208,.6);
+  }
+  .topwrap { max-width: 1120px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: inherit; }
+  .brand .mark {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700; font-size: 24px; letter-spacing: -.03em;
+    display: inline-flex; align-items: baseline; gap: 4px;
+  }
+  .brand .mark .amp {
+    background: var(--ink); color: var(--sunset);
+    padding: 2px 8px 4px; border-radius: 5px; font-size: 20px; margin-left: 2px;
+  }
+  .brand .sub {
+    color: var(--muted); font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase; letter-spacing: .08em;
+  }
+  .top-actions { margin-left: auto; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .top-actions a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--ink); }
+  .top-actions a.cta {
+    background: var(--ink); color: var(--sunset);
+    border: 2px solid var(--ink); border-radius: 4px;
+    padding: 10px 16px; font-weight: 700;
+    box-shadow: 3px 3px 0 var(--sunset);
+    transition: transform .1s ease, box-shadow .12s ease;
+  }
+  .top-actions a.cta:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--sunset); }
+
+  .hero { max-width: 1120px; margin: 0 auto; padding: 96px 24px 40px; text-align: left; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink); color: var(--sunset);
+    padding: 6px 12px; border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--sunset);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .5 } }
+
+  h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(48px, 7.8vw, 96px);
+    line-height: .95; letter-spacing: -.035em;
+    margin: 0 0 32px;
+    max-width: 12ch;
+  }
+  h1 em {
+    font-style: normal;
+    background: var(--sunset); color: #fff;
+    padding: 0 14px 6px; border-radius: 8px;
+    display: inline-block; transform: rotate(-.8deg);
+  }
+  h1 .stroke { -webkit-text-stroke: 1.5px var(--ink); color: transparent; }
+
+  .lead {
+    font-size: 19px; color: var(--muted); max-width: 620px; margin: 0 0 40px;
+    line-height: 1.55; font-family: 'Inter', sans-serif;
+  }
+  .lead strong { color: var(--ink); font-weight: 600; }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 26px; border-radius: 4px; font-weight: 700; font-size: 15.5px;
+    text-decoration: none; border: 2px solid var(--ink); cursor: pointer;
+    transition: transform .1s ease, box-shadow .12s ease;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    letter-spacing: -.005em;
+  }
+  .btn.primary {
+    background: var(--ink); color: var(--sunset);
+    box-shadow: 6px 6px 0 var(--sunset);
+  }
+  .btn.primary:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--sunset); }
+  .btn.primary:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--sunset); }
+  .btn.ghost {
+    background: #faf7ee; color: var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .btn.ghost:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+  .btn .arrow { transition: transform .18s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .meta {
+    display: flex; gap: 28px; margin-top: 40px; color: var(--muted); font-size: 14px;
+    flex-wrap: wrap;
+  }
+  .meta div {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; background: #faf7ee; border: 1.5px solid var(--ink); border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .meta strong { color: var(--ink); font-weight: 700; }
+
+  /* Section: what you get */
+  section.section { max-width: 1120px; margin: 0 auto; padding: 80px 24px; }
+  section.section .title {
+    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+    font-size: clamp(34px, 4.6vw, 52px); line-height: 1.02; letter-spacing: -.03em;
+    margin: 0 0 18px; max-width: 20ch;
+  }
+  section.section .title em {
+    font-style: normal;
+    background: var(--sunset); color: #fff;
+    padding: 0 10px 4px; border-radius: 6px;
+    display: inline-block; transform: rotate(-.6deg);
+  }
+  section.section .lede {
+    color: var(--muted); font-size: 17px; max-width: 640px; margin: 0 0 44px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .bucket-grid {
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px;
+  }
+  @media (max-width: 900px) { .bucket-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .bucket-grid { grid-template-columns: 1fr; } }
+  .bucket {
+    background: #fff; border: 2px solid var(--ink); border-radius: 4px;
+    padding: 22px 20px; position: relative; overflow: hidden;
+    transition: transform .12s ease, box-shadow .14s ease;
+  }
+  .bucket:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 var(--sunset); }
+  .bucket .icon { font-size: 26px; margin-bottom: 10px; display: block; }
+  .bucket h3 {
+    margin: 0 0 6px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 17px; font-weight: 800; letter-spacing: -.015em;
+  }
+  .bucket p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; font-family: 'Inter', sans-serif; }
+
+  /* How it works */
+  .how-row {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px;
+    margin-top: 20px;
+  }
+  @media (max-width: 800px) { .how-row { grid-template-columns: 1fr; gap: 20px; } }
+  .step {
+    background: #fff; border: 2px solid var(--ink); border-radius: 4px;
+    padding: 26px 24px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .step .num {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: 13px; letter-spacing: .05em;
+    color: var(--sunset); margin-bottom: 14px;
+    display: inline-block;
+    background: var(--ink); padding: 5px 9px; border-radius: 3px;
+  }
+  .step h4 {
+    margin: 0 0 8px; font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 20px; font-weight: 800; letter-spacing: -.015em;
+  }
+  .step p { margin: 0; color: var(--muted); font-size: 14.5px; font-family: 'Inter', sans-serif; }
+
+  /* Quote strip */
+  .strip {
+    background: var(--ink); color: var(--cream); border-radius: 4px;
+    border: 2px solid var(--ink);
+    padding: 56px 40px;
+    max-width: 1120px; margin: 0 auto 40px;
+    box-shadow: 10px 10px 0 var(--sunset);
+  }
+  .strip .kicker {
+    font-family: 'JetBrains Mono', monospace; color: var(--sunset);
+    font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .strip h2 {
+    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+    font-size: clamp(34px, 4.6vw, 52px); line-height: 1.0; letter-spacing: -.03em;
+    margin: 0 0 20px; max-width: 20ch;
+  }
+  .strip h2 em {
+    color: #fff; font-style: normal;
+    background: var(--sunset); padding: 0 10px 4px; border-radius: 6px;
+    display: inline-block;
+  }
+  .strip p { color: #b4ad9d; font-size: 16px; max-width: 560px; margin: 0 0 32px; font-family: 'Inter', sans-serif; }
+  .strip .btn.primary {
+    background: var(--sunset); color: #fff;
+    border-color: var(--sunset);
+    box-shadow: 6px 6px 0 #fff;
+  }
+  .strip .btn.primary:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 #fff; }
+
+  footer.foot {
+    max-width: 1120px; margin: 0 auto; padding: 40px 24px 60px;
+    color: var(--muted); font-size: 12.5px;
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    border-top: 2px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  footer.foot a { color: var(--muted); text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<span class="blob a"></span>
+<span class="blob b"></span>
+
+<header class="topbar">
+  <div class="topwrap">
+    <a class="brand" href="./">
+      <span class="mark">Nifty <span class="amp">Scope</span></span>
+      <span class="sub">by GetNifty</span>
+    </a>
+    <div class="top-actions">
+      <a href="#what">What you get</a>
+      <a href="#how">How it works</a>
+      <a class="cta" href="./start.html">Start scoping &rarr;</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <span class="eyebrow"><span class="dot"></span>Free. 5 minutes. No signup.</span>
+  <h1>
+    Where does <em>AI</em><br>
+    actually fit in<br>
+    <span class="stroke">your</span> business?
+  </h1>
+  <p class="lead">
+    Twenty questions. Five minutes. Zero fluff. <strong>We'll show you exactly where AI, automation, web, brand, and content pay off</strong> - and what to ship first. Then we build it, or we tell you honestly you don't need us yet.
+  </p>
+  <div class="cta-row">
+    <a class="btn primary" href="./start.html">Start the scope <span class="arrow">&rarr;</span></a>
+    <a class="btn ghost" href="#how">How it works</a>
+  </div>
+  <div class="meta">
+    <div><strong>5 min</strong> average completion</div>
+    <div><strong>21 questions</strong>, mostly one-tap</div>
+    <div><strong>Report emailed</strong> when done</div>
+  </div>
+</div>
+
+<section class="section" id="what">
+  <h2 class="title">Five buckets. One <em>honest</em> map.</h2>
+  <p class="lede">Every business is a mix of these levers. We score your answers and tell you which two matter most right now.</p>
+  <div class="bucket-grid">
+    <div class="bucket">
+      <div class="icon">&#129504;</div>
+      <h3>AI Ops</h3>
+      <p>Custom assistants trained on your business, RAG over your docs, AI qualifying leads, drafting proposals.</p>
+    </div>
+    <div class="bucket">
+      <div class="icon">&#9889;</div>
+      <h3>Automation</h3>
+      <p>Kill the busywork. Route inquiries, sync data, trigger follow-ups. Give hours back to the team.</p>
+    </div>
+    <div class="bucket">
+      <div class="icon">&#128421;</div>
+      <h3>Web Dev</h3>
+      <p>Rebuild the site so it actually converts. Or ship the missing tool. Fast, modern, SEO-ready.</p>
+    </div>
+    <div class="bucket">
+      <div class="icon">&#127912;</div>
+      <h3>Brand &amp; Design</h3>
+      <p>Logo, voice, look, story. So your brand doesn't shrink you back to looking like everyone else.</p>
+    </div>
+    <div class="bucket">
+      <div class="icon">&#128203;</div>
+      <h3>Content &amp; SEO</h3>
+      <p>Show up where buyers search - Google, AI answer engines, LinkedIn. Consistently, without you writing it all.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <h2 class="title">Fast. Friendly. <em>Actually useful.</em></h2>
+  <div class="how-row">
+    <div class="step">
+      <span class="num">01</span>
+      <h4>Answer 21 quick questions</h4>
+      <p>Mostly one-tap. A few short text boxes for the important stuff. Every keystroke autosaves in your browser.</p>
+    </div>
+    <div class="step">
+      <span class="num">02</span>
+      <h4>Get your fit report</h4>
+      <p>We score your answers into five buckets and highlight the two levers with the biggest payoff right now.</p>
+    </div>
+    <div class="step">
+      <span class="num">03</span>
+      <h4>We build it - or we don't</h4>
+      <p>If it's a fit, we scope, price, and ship. If it's not, we tell you what to do instead. No pressure, ever.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:20px">
+  <div class="strip">
+    <p class="kicker">One clean answer.</p>
+    <h2>Stop guessing where to spend the <em>next dollar</em>.</h2>
+    <p>Five minutes now buys you a clear next move. Even if you never work with us, you'll leave with a real map.</p>
+    <a class="btn primary" href="./start.html">Start the scope <span class="arrow">&rarr;</span></a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div>
+    &copy; <span id="year"></span> Nifty Scope - a free tool from <a href="https://getnifty.xyz" target="_blank" rel="noopener">GetNifty</a>.
+  </div>
+  <div>
+    <a href="./start.html">Start scoping</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://getnifty.xyz" target="_blank" rel="noopener">GetNifty</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

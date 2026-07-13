@@ -3,456 +3,405 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nifty Scope - Start | GetNifty</title>
-<meta name="description" content="20 quick questions. 5 minutes. Find where AI, automation, web, brand, and content actually fit your business.">
+<title>Nifty Scope - Sort your week | GetNifty</title>
+<meta name="description" content="Walk through your week. Sort each task into one of four buckets. Get a real map of what should run itself, what should stay with you, and what should stop.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A8%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='24' fill='%2348b898'/%3E%3C/svg%3E">
 <style>
   :root {
-    --cream: #fbf6ec;
-    --ink: #16130f;
-    --muted: #6b6559;
-    --line: #e6dfd0;
-    --sunset: #ff5a1f;
-    --sunset-soft: #ffe4d6;
-    --purple: #6b3aff;
-    --purple-soft: #ede4ff;
-    --green: #2f6b3a;
+    --bg: #d5d9cf;
+    --bg-2: #dee1d8;
+    --panel: #f4f6ee;
+    --panel-2: #ffffff;
+    --ink: #1a1c1a;
+    --ink-soft: #2b2e2b;
+    --muted: #6b6f65;
+    --muted-soft: #8b8f85;
+    --line: #b8bcaf;
+    --line-soft: #cfd3c8;
+    --mint: #48b898;
+    --mint-soft: #d4ede4;
+    --sage-deep: #a9b19d;
   }
   * { box-sizing: border-box; }
   html, body {
-    margin: 0; padding: 0; background: var(--cream); color: var(--ink);
+    margin: 0; padding: 0; background: var(--bg); color: var(--ink);
     font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 16px; line-height: 1.5;
+    font-size: 16px; line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     height: 100%; overflow-x: hidden;
   }
-  ::selection { background: var(--sunset); color: #fff; }
+  ::selection { background: var(--mint); color: #fff; }
   a { color: var(--ink); }
-
-  /* Dotted grid background */
-  body::before {
-    content: ""; position: fixed; inset: 0; z-index: -1;
-    background-image: radial-gradient(circle, rgba(22,19,15,.09) 1px, transparent 1.2px);
-    background-size: 22px 22px;
-    background-position: 0 0;
-    pointer-events: none;
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
-  }
-
-  /* Background blobs */
-  .blob {
-    position: fixed; z-index: -2; border-radius: 50%; filter: blur(90px); opacity: .38;
-    pointer-events: none;
-  }
-  .blob.a { top: -160px; right: -120px; width: 500px; height: 500px; background: radial-gradient(circle, #ffb59a, transparent 65%); }
-  .blob.b { bottom: -240px; left: -160px; width: 560px; height: 560px; background: radial-gradient(circle, #e0d0ff, transparent 65%); }
 
   /* Progress bar */
   .progress-outer {
-    position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 30;
+    position: fixed; top: 0; left: 0; right: 0; height: 3px;
+    background: rgba(184,188,175,.5); z-index: 30;
   }
   .progress-bar {
-    height: 100%; background: linear-gradient(90deg, var(--sunset), #ff9a70);
-    width: 0%; transition: width .35s cubic-bezier(.2,.7,.2,1);
+    height: 100%; background: var(--mint);
+    width: 0%; transition: width .4s cubic-bezier(.2,.7,.2,1);
   }
 
-  /* Top bar */
   header.topbar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 20;
-    padding: 22px 32px; display: flex; align-items: center; gap: 20px;
+    padding: 22px 32px;
+    display: flex; align-items: center; gap: 20px;
+    background: linear-gradient(to bottom, rgba(213,217,207,.95) 0%, rgba(213,217,207,.7) 70%, transparent 100%);
   }
-  .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--ink); }
+  .brand { display: flex; align-items: baseline; gap: 12px; text-decoration: none; color: var(--ink); }
   .brand .mark {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-weight: 700; font-size: 22px; letter-spacing: -.03em;
-    display: inline-flex; align-items: baseline; gap: 4px;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: 22px; letter-spacing: -.02em;
+    display: inline-flex; align-items: baseline; gap: 8px;
   }
-  .brand .mark .amp {
-    color: var(--sunset); background: var(--ink); color: var(--sunset);
-    padding: 2px 8px 3px; border-radius: 5px; font-size: 18px; margin-left: 2px;
+  .brand .mark .dot {
+    width: 9px; height: 9px; border-radius: 50%; background: var(--mint); display: inline-block;
   }
   .brand .sub {
-    color: var(--muted); font-size: 11px; font-family: 'JetBrains Mono', monospace;
-    text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase; letter-spacing: .1em;
   }
   .count {
-    margin-left: auto; color: var(--muted); font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px; font-variant-numeric: tabular-nums;
-    display: flex; align-items: center; gap: 6px;
-    background: #fff; border: 1.5px solid var(--ink); padding: 5px 10px; border-radius: 6px;
+    margin-left: auto; color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: .06em;
+    font-variant-numeric: tabular-nums;
   }
-  .count .num { color: var(--ink); font-weight: 700; }
+  .count .num { color: var(--ink); font-weight: 600; }
   .exit {
-    color: var(--muted); font-size: 13px; text-decoration: none;
-    padding: 6px 12px; border-radius: 999px; border: 1px solid transparent;
+    color: var(--muted); font-size: 12.5px; text-decoration: none;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: .04em;
   }
-  .exit:hover { border-color: var(--line); background: #fff; color: var(--ink); }
+  .exit:hover { color: var(--ink); }
 
   /* Main stage */
   main.stage {
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 110px 24px 120px;
+    padding: 120px 24px 140px;
   }
-
-  /* THE BOX */
-  .box {
-    position: relative;
-    background: #fff;
-    border: 2px solid var(--ink);
-    border-radius: 4px;
-    padding: 52px 56px;
-    max-width: 760px; width: 100%;
-    box-shadow: 10px 10px 0 var(--ink);
+  .card {
+    max-width: 760px; width: 100%; margin: 0 auto;
   }
-  @media (max-width: 640px) {
-    .box { padding: 40px 28px; box-shadow: 6px 6px 0 var(--ink); }
-  }
-  .box::before, .box::after,
-  .box .brc-tr, .box .brc-br {
-    content: ""; position: absolute; width: 14px; height: 14px;
-    border: 2px solid var(--sunset); background: var(--cream);
-  }
-  .box::before  { top: -10px; left: -10px;  border-right: none; border-bottom: none; }
-  .box::after   { bottom: -10px; right: -10px; border-left: none; border-top: none; }
-  .box .brc-tr  { top: -10px; right: -10px;  border-left: none; border-bottom: none; }
-  .box .brc-br  { bottom: -10px; left: -10px; border-right: none; border-top: none; }
-
-  .card { width: 100%; }
   .card.enter { animation: enter .5s cubic-bezier(.2,.7,.2,1) both; }
   .card.exit { animation: exit .3s cubic-bezier(.2,.7,.2,1) both; }
-  @keyframes enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes enter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
   @keyframes exit { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-14px); } }
 
   .qnum {
-    display: inline-flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 12px;
     font-family: 'JetBrains Mono', monospace;
-    color: var(--muted); font-size: 12px; font-weight: 600;
-    letter-spacing: .06em; margin-bottom: 24px; text-transform: uppercase;
+    color: var(--muted); font-size: 12px; font-weight: 500;
+    letter-spacing: .14em; margin-bottom: 26px; text-transform: uppercase;
   }
-  .qnum .badge {
-    background: var(--ink); color: var(--sunset);
-    padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: .04em;
-  }
-  .qnum .req { color: var(--sunset); }
+  .qnum .num { color: var(--muted); }
+  .qnum .dot { color: var(--muted); }
+  .qnum .req { color: var(--mint); }
 
   h1.q {
-    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700;
-    font-size: clamp(28px, 4.2vw, 42px); line-height: 1.12; letter-spacing: -.025em;
-    margin: 0 0 12px; color: var(--ink);
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(34px, 5.4vw, 56px); line-height: 1.05; letter-spacing: -.02em;
+    margin: 0 0 14px; color: var(--ink);
+    max-width: 20ch;
   }
-  h1.q em {
-    font-style: normal;
-    background: var(--sunset); color: #fff;
-    padding: 1px 10px 3px; border-radius: 5px;
-    display: inline-block; transform: rotate(-.6deg);
-  }
+  h1.q em { font-style: italic; color: var(--ink); font-weight: 500; }
   .subtitle {
-    color: var(--muted); font-size: 15px; margin: 0 0 32px;
-    font-family: 'Inter', sans-serif;
+    color: var(--muted); font-size: 17px; margin: 0 0 36px;
+    line-height: 1.55; max-width: 34ch;
   }
 
-  /* Text input */
+  /* Text inputs */
   .input-wrap { position: relative; }
   input.big, textarea.big {
-    width: 100%; background: #faf7ee;
-    border: 1.5px solid var(--ink); border-radius: 4px;
-    padding: 14px 16px; font-size: 19px; color: var(--ink);
-    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 500;
+    width: 100%; background: transparent;
+    border: none; border-bottom: 1.5px solid var(--line);
+    padding: 14px 0; font-size: 22px; color: var(--ink);
+    font-family: 'Fraunces', serif; font-weight: 500;
     outline: none;
-    transition: box-shadow .12s ease, background .12s ease;
+    transition: border-color .18s ease;
   }
   input.big::placeholder, textarea.big::placeholder {
-    color: #b4ab98; font-weight: 400; font-family: 'Inter', sans-serif;
+    color: var(--sage-deep); font-weight: 400; font-family: 'Inter', sans-serif;
   }
-  input.big:focus, textarea.big:focus {
-    background: #fff;
-    box-shadow: 4px 4px 0 var(--sunset);
-    transform: translate(-1px, -1px);
-  }
-  textarea.big { resize: none; min-height: 72px; line-height: 1.4; }
+  input.big:focus, textarea.big:focus { border-bottom-color: var(--ink); }
+  textarea.big { resize: none; min-height: 72px; line-height: 1.4; padding-top: 10px; }
 
-  /* Choice options */
-  .choices { display: flex; flex-direction: column; gap: 8px; }
+  /* Single-choice options */
+  .choices { display: flex; flex-direction: column; gap: 10px; }
   .choice {
     display: flex; align-items: center; gap: 14px;
-    background: #faf7ee; border: 1.5px solid var(--ink); border-radius: 4px;
-    padding: 12px 16px; cursor: pointer;
-    transition: transform .1s ease, box-shadow .12s ease, background .12s ease;
+    background: var(--panel); border: 1px solid var(--line-soft); border-radius: 12px;
+    padding: 14px 18px; cursor: pointer;
+    transition: all .14s ease;
     user-select: none;
   }
-  .choice:hover {
-    background: #fff;
-    box-shadow: 3px 3px 0 var(--ink);
-    transform: translate(-1.5px, -1.5px);
-  }
-  .choice.selected {
-    background: var(--sunset); color: #fff;
-    box-shadow: 3px 3px 0 var(--ink);
-    transform: translate(-1.5px, -1.5px);
-  }
+  .choice:hover { border-color: var(--ink); background: var(--panel-2); }
+  .choice.selected { border-color: var(--mint); background: var(--mint-soft); }
   .choice .key {
-    background: #fff; border: 1.5px solid var(--ink);
-    width: 28px; height: 28px; border-radius: 4px;
+    background: var(--panel-2); border: 1px solid var(--line-soft);
+    width: 28px; height: 28px; border-radius: 6px;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; font-weight: 700; color: var(--ink);
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+    color: var(--muted);
     flex-shrink: 0;
-    transition: all .12s ease;
+    transition: all .14s ease;
   }
-  .choice.selected .key { background: var(--ink); color: var(--sunset); border-color: var(--ink); }
-  .choice .label {
-    font-family: 'Bricolage Grotesque', sans-serif; font-size: 15.5px; font-weight: 600;
-  }
-  .choice .check {
-    margin-left: auto; opacity: 0; transition: opacity .15s ease;
-    color: #fff; font-weight: 700; font-size: 16px;
-  }
+  .choice.selected .key { background: var(--mint); color: #fff; border-color: var(--mint); }
+  .choice .label { font-size: 16px; font-weight: 500; color: var(--ink); }
+  .choice .check { margin-left: auto; opacity: 0; color: var(--mint); font-weight: 700; font-size: 16px; transition: opacity .15s; }
   .choice.selected .check { opacity: 1; }
 
-  /* Contact / final form */
-  .form-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  /* Bucket sort layout (2x2 grid on desktop, stacked on mobile) */
+  .bucket-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;
   }
+  @media (max-width: 640px) { .bucket-grid { grid-template-columns: 1fr; } }
+  .bkt {
+    display: flex; flex-direction: column; gap: 10px;
+    background: var(--panel); border: 1px solid var(--line-soft); border-radius: 14px;
+    padding: 20px 22px; cursor: pointer;
+    transition: all .14s ease;
+    text-align: left;
+  }
+  .bkt:hover { border-color: var(--ink); background: var(--panel-2); transform: translateY(-2px); }
+  .bkt.selected {
+    border-color: var(--mint); background: var(--mint-soft);
+  }
+  .bkt .kicker {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .14em;
+  }
+  .bkt .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+  .bkt .key {
+    margin-left: auto;
+    background: var(--panel-2); border: 1px solid var(--line-soft);
+    width: 24px; height: 24px; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    color: var(--muted);
+    transition: all .14s ease;
+  }
+  .bkt.selected .key { background: var(--mint); color: #fff; border-color: var(--mint); }
+  .bkt h3 {
+    margin: 0; font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: 20px; letter-spacing: -.015em; line-height: 1.15;
+    color: var(--ink);
+  }
+  .bkt p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+
+  /* Contact form */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
-  .form-grid .field {
-    display: flex; flex-direction: column; gap: 6px;
-    background: #faf7ee; border: 1.5px solid var(--ink); border-radius: 4px;
-    padding: 10px 14px;
-    transition: box-shadow .12s ease, transform .12s ease, background .12s ease;
-  }
-  .form-grid .field:focus-within {
-    background: #fff;
-    box-shadow: 4px 4px 0 var(--sunset);
-    transform: translate(-1px, -1px);
-  }
+  .form-grid .field { display: flex; flex-direction: column; gap: 6px; }
   .form-grid label {
-    font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
-    text-transform: uppercase; letter-spacing: .06em;
-    color: var(--muted); font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); font-weight: 600;
   }
   .form-grid input {
-    background: transparent; border: none;
-    padding: 2px 0; font-size: 17px; color: var(--ink);
-    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 500;
+    background: transparent; border: none; border-bottom: 1.5px solid var(--line);
+    padding: 8px 0; font-size: 17px; color: var(--ink);
+    font-family: 'Fraunces', serif; font-weight: 500;
     outline: none;
+    transition: border-color .18s ease;
   }
-  .form-grid input::placeholder { color: #b4ab98; font-weight: 400; font-family: 'Inter', sans-serif; }
+  .form-grid input:focus { border-bottom-color: var(--ink); }
+  .form-grid input::placeholder { color: var(--sage-deep); font-family: 'Inter', sans-serif; font-weight: 400; }
 
-  /* Action row (OK + hint) */
-  .action-row {
-    display: flex; align-items: center; gap: 14px; margin-top: 32px;
-    flex-wrap: wrap;
-  }
+  /* Action row */
+  .action-row { display: flex; align-items: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
   button.ok {
-    appearance: none; cursor: pointer;
-    background: var(--ink); color: var(--sunset);
-    border: 2px solid var(--ink); border-radius: 4px;
-    padding: 12px 22px;
-    font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 700;
-    letter-spacing: .01em;
+    appearance: none; border: none; cursor: pointer;
+    background: var(--ink); color: var(--panel);
+    padding: 14px 26px; border-radius: 999px;
+    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500;
     display: inline-flex; align-items: center; gap: 10px;
-    transition: transform .1s ease, box-shadow .12s ease;
-    box-shadow: 4px 4px 0 var(--sunset);
+    transition: transform .12s ease, background .18s ease;
   }
-  button.ok:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--sunset); }
-  button.ok:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--sunset); }
-  button.ok:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: 4px 4px 0 var(--line); }
+  button.ok:hover { background: #000; transform: translateY(-1px); }
+  button.ok:disabled { opacity: .4; cursor: not-allowed; transform: none; }
   .hint {
-    color: var(--muted); font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted); font-size: 12.5px;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: .04em;
   }
   .hint kbd {
-    background: #fff; border: 1.5px solid var(--ink); border-radius: 3px;
-    padding: 2px 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    color: var(--ink); font-weight: 600;
-    box-shadow: 1.5px 1.5px 0 var(--ink);
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 5px; padding: 2px 6px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink); font-weight: 600;
     margin: 0 1px;
   }
 
-  /* Nav (back button) */
   .nav-back {
-    position: fixed; bottom: 22px; left: 22px; z-index: 25;
-    background: #fff; border: 1.5px solid var(--ink); border-radius: 4px;
-    padding: 7px 12px; font-size: 12px; color: var(--ink); cursor: pointer;
+    position: fixed; bottom: 24px; left: 24px; z-index: 25;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 14px; font-size: 12.5px; color: var(--muted); cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: .04em;
     display: inline-flex; align-items: center; gap: 6px;
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace; font-weight: 600;
-    box-shadow: 2.5px 2.5px 0 var(--ink);
-    transition: transform .1s ease, box-shadow .12s ease;
+    transition: all .14s ease;
   }
-  .nav-back:hover { transform: translate(-1.5px, -1.5px); box-shadow: 4px 4px 0 var(--ink); }
+  .nav-back:hover { color: var(--ink); border-color: var(--ink); }
   .nav-back.hidden { display: none; }
 
-  .saved-note {
-    background: var(--sunset-soft); border: 1.5px solid var(--sunset); color: #7a3110;
-    padding: 12px 14px; border-radius: 4px; font-size: 13px; margin-top: 18px;
-    font-family: 'JetBrains Mono', monospace; font-weight: 600;
-  }
-  .saved-note.err { background: #fde8e8; border-color: #d33; color: #7a1a1a; }
-
-  .cap-note {
-    font-size: 11.5px; color: var(--muted); margin-top: 10px;
-    font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em;
-  }
-
-  /* Intro screen */
+  /* Intro */
   .intro { text-align: left; }
   .intro .eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--ink); color: var(--sunset);
-    padding: 6px 12px; border-radius: 4px;
+    background: var(--panel); border: 1px solid var(--line-soft);
+    color: var(--muted);
+    padding: 6px 12px; border-radius: 999px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    margin-bottom: 26px;
+    font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 30px;
   }
-  .intro .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sunset); }
+  .intro .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); }
   .intro h1 {
-    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
-    font-size: clamp(38px, 5.6vw, 60px); line-height: 1.0; letter-spacing: -.035em;
-    margin: 0 0 24px;
-  }
-  .intro h1 em {
-    font-style: normal;
-    background: var(--sunset); color: #fff;
-    padding: 0 12px 4px; border-radius: 6px;
-    display: inline-block; transform: rotate(-.8deg);
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(44px, 6.4vw, 76px);
+    line-height: 1.02; letter-spacing: -.025em;
+    margin: 0 0 26px; max-width: 15ch;
   }
   .intro p.lead {
-    font-size: 17px; color: var(--muted); max-width: 560px; margin: 0 0 32px;
-    font-family: 'Inter', sans-serif;
+    font-size: 18px; color: var(--muted); max-width: 560px; margin: 0 0 36px;
+    line-height: 1.6;
   }
-  .intro p.lead strong { color: var(--ink); font-weight: 600; }
+  .intro p.lead strong { color: var(--ink); font-weight: 500; }
   .intro .stats {
-    display: flex; gap: 18px; margin-top: 28px;
+    display: flex; gap: 22px; margin-top: 26px;
     color: var(--muted); font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; flex-wrap: wrap; text-transform: uppercase; letter-spacing: .04em;
+    font-size: 12px; flex-wrap: wrap;
+    text-transform: uppercase; letter-spacing: .06em;
   }
-  .intro .stats div { padding: 6px 10px; background: #faf7ee; border: 1.5px solid var(--ink); border-radius: 4px; }
-  .intro .stats strong { color: var(--ink); font-weight: 700; }
+  .intro .stats div { display: flex; align-items: center; gap: 8px; }
+  .intro .stats .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); }
+  .intro .stats strong { color: var(--ink); font-weight: 600; }
 
-  /* Result screen */
+  /* Result */
   .result h1 {
-    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
-    font-size: clamp(32px, 4.8vw, 48px); line-height: 1.06; letter-spacing: -.03em;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(38px, 5.6vw, 56px); line-height: 1.05; letter-spacing: -.02em;
     margin: 0 0 14px;
   }
-  .result h1 em {
-    font-style: normal;
-    background: var(--sunset); color: #fff;
-    padding: 0 10px 3px; border-radius: 5px;
-    display: inline-block;
-  }
+  .result h1 em { font-style: italic; color: var(--ink); }
   .result p.lede {
-    color: var(--muted); font-size: 16px; margin: 0 0 32px; max-width: 620px;
-    font-family: 'Inter', sans-serif;
+    color: var(--muted); font-size: 17px; margin: 0 0 40px; max-width: 620px;
+    line-height: 1.6;
   }
-  .bucket-list { display: grid; gap: 12px; margin-bottom: 28px; }
-  .b-card {
-    background: #faf7ee; border: 1.5px solid var(--ink); border-radius: 4px;
-    padding: 20px 22px; position: relative; overflow: hidden;
+  .result-bucket-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px;
+    margin-bottom: 30px;
   }
-  .b-card.hot {
-    background: #fff;
-    box-shadow: 5px 5px 0 var(--sunset);
-    transform: translate(-2px, -2px);
+  @media (max-width: 640px) { .result-bucket-grid { grid-template-columns: 1fr; } }
+  .r-bucket {
+    background: var(--panel); border: 1px solid var(--line-soft); border-radius: 14px;
+    padding: 22px 24px;
   }
-  .b-card .head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
-  .b-card .icon { font-size: 26px; }
-  .b-card h3 {
-    margin: 0; font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 20px; font-weight: 800; letter-spacing: -.02em; flex: 1;
-  }
-  .b-card .pill {
-    background: var(--ink); color: var(--sunset);
+  .r-bucket.pick { border-color: var(--mint); background: var(--mint-soft); }
+  .r-bucket .kicker {
+    display: flex; align-items: center; gap: 10px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px; font-weight: 700;
-    padding: 4px 8px; border-radius: 3px; letter-spacing: .06em; text-transform: uppercase;
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .14em;
+    margin-bottom: 12px;
   }
-  .b-card .pill.warm { background: var(--sunset); color: #fff; }
-  .b-card .pill.cool { background: #efe9d9; color: var(--muted); }
-  .b-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; font-family: 'Inter', sans-serif; }
-  .b-card p strong { color: var(--ink); font-weight: 600; }
-  .b-card .meter {
-    height: 6px; background: #efe9d9; border-radius: 2px; margin-top: 14px; overflow: hidden;
-    border: 1.5px solid var(--ink);
+  .r-bucket .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+  .r-bucket .kicker .tag {
+    margin-left: auto;
+    background: var(--ink); color: var(--panel);
+    padding: 3px 8px; border-radius: 4px; font-size: 10px; letter-spacing: .1em;
   }
-  .b-card .meter span { display: block; height: 100%; background: var(--sunset); }
+  .r-bucket.pick .kicker .tag { background: var(--mint); color: #fff; }
+  .r-bucket h3 {
+    margin: 0 0 10px;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: 22px; letter-spacing: -.015em; line-height: 1.15;
+  }
+  .r-bucket .count-line {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);
+    margin-bottom: 12px; letter-spacing: .04em;
+  }
+  .r-bucket ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .r-bucket ul li {
+    font-size: 14.5px; color: var(--ink); line-height: 1.45;
+    padding-left: 16px; position: relative;
+  }
+  .r-bucket ul li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 1.5px; background: var(--muted);
+  }
+  .r-bucket .empty { color: var(--muted); font-style: italic; font-size: 14px; }
 
   .result-cta {
-    background: var(--ink); color: var(--cream); border-radius: 4px;
-    border: 2px solid var(--ink);
-    padding: 30px; margin: 28px 0 20px;
-    box-shadow: 6px 6px 0 var(--sunset);
+    background: var(--ink); color: var(--panel); border-radius: 16px;
+    padding: 34px; margin: 32px 0 20px;
+  }
+  .result-cta .kicker {
+    font-family: 'JetBrains Mono', monospace; color: var(--mint);
+    font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 12px;
   }
   .result-cta h3 {
-    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
-    font-size: 26px; line-height: 1.1; letter-spacing: -.02em; margin: 0 0 10px;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: 28px; line-height: 1.1; letter-spacing: -.015em; margin: 0 0 12px;
+    color: var(--panel);
   }
-  .result-cta h3 em {
-    color: var(--sunset); font-style: normal; text-decoration: underline;
-    text-decoration-thickness: 3px; text-underline-offset: 4px;
-  }
-  .result-cta p { color: #b4ad9d; font-size: 14.5px; margin: 0 0 22px; font-family: 'Inter', sans-serif; }
-  .result-cta .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .result-cta p { color: #b8bcb0; font-size: 15px; margin: 0 0 22px; line-height: 1.6; }
+  .result-cta .row { display: flex; gap: 12px; flex-wrap: wrap; }
   .result-cta a.btn {
-    background: var(--sunset); color: #fff;
-    border: 2px solid var(--sunset); border-radius: 4px;
-    padding: 12px 20px; text-decoration: none;
-    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 14.5px;
+    background: var(--mint); color: var(--ink);
+    padding: 12px 22px; border-radius: 999px;
+    text-decoration: none; font-weight: 500; font-size: 15px;
     display: inline-flex; align-items: center; gap: 8px;
-    transition: transform .1s ease, box-shadow .12s ease;
+    transition: transform .12s ease, background .18s ease;
   }
-  .result-cta a.btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #fff; }
-  .result-cta a.btn.ghost { background: transparent; color: var(--cream); border-color: #4a4238; }
-  .result-cta a.btn.ghost:hover { border-color: #fff; box-shadow: 4px 4px 0 var(--sunset); }
+  .result-cta a.btn:hover { background: #5ec8a8; transform: translateY(-1px); }
+  .result-cta a.btn.ghost { background: transparent; color: var(--panel); border: 1px solid #4a4d47; }
+  .result-cta a.btn.ghost:hover { border-color: var(--panel); }
 
-  .result-actions {
-    display: flex; gap: 8px; flex-wrap: wrap;
-  }
+  .result-actions { display: flex; gap: 10px; flex-wrap: wrap; }
   .result-actions button, .result-actions a {
-    background: #faf7ee; border: 1.5px solid var(--ink); border-radius: 3px;
-    color: var(--ink);
-    padding: 7px 12px; font-size: 12.5px; cursor: pointer;
-    text-decoration: none;
-    font-family: 'JetBrains Mono', monospace; font-weight: 600;
-    letter-spacing: .02em;
+    background: var(--panel); border: 1px solid var(--line-soft);
+    color: var(--muted);
+    padding: 7px 13px; border-radius: 999px; font-size: 12.5px; cursor: pointer;
+    text-decoration: none; font-family: 'JetBrains Mono', monospace; letter-spacing: .04em;
     display: inline-flex; align-items: center; gap: 6px;
-    transition: transform .1s ease, box-shadow .12s ease;
   }
-  .result-actions button:hover, .result-actions a:hover {
-    background: #fff; box-shadow: 2px 2px 0 var(--ink); transform: translate(-1px,-1px);
+  .result-actions button:hover, .result-actions a:hover { color: var(--ink); border-color: var(--ink); }
+
+  .saved-note {
+    background: var(--mint-soft); border: 1px solid var(--mint); color: #275842;
+    padding: 12px 16px; border-radius: 8px; font-size: 13.5px; margin-top: 20px;
   }
+  .saved-note.err { background: #f5dede; border-color: #d09090; color: #7a1a1a; }
 
   .footer-mini {
-    text-align: center; color: var(--muted); font-size: 11.5px; padding: 20px;
-    max-width: 720px; margin: 0 auto;
-    font-family: 'JetBrains Mono', monospace;
+    text-align: center; color: var(--muted); font-size: 11.5px; padding: 22px;
+    max-width: 760px; margin: 0 auto;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: .04em;
   }
   .footer-mini a { color: var(--muted); text-decoration: underline; }
 
-  /* Netlify hidden form (for form-detection) */
   form.netlify-honey { display: none; }
 </style>
 </head>
 <body>
 
-<span class="blob a"></span>
-<span class="blob b"></span>
-
-<!-- Hidden form so Netlify auto-detects and creates a submissions endpoint -->
-<form name="nifty-scope" netlify netlify-honeypot="bot-field" class="netlify-honey" hidden>
+<!-- Hidden Netlify form -->
+<form name="nifty-scope-v2" netlify netlify-honeypot="bot-field" class="netlify-honey" hidden>
   <input name="bot-field" />
   <input type="text" name="business_name" />
   <input type="email" name="email" />
   <input type="text" name="contact_name" />
   <input type="tel" name="phone" />
-  <input type="text" name="best_time" />
+  <textarea name="buckets_json"></textarea>
   <textarea name="answers_json"></textarea>
-  <textarea name="scores_json"></textarea>
   <textarea name="summary_md"></textarea>
 </form>
 
@@ -460,7 +409,7 @@
 
 <header class="topbar">
   <a class="brand" href="./">
-    <span class="mark">Nifty <span class="amp">Scope</span></span>
+    <span class="mark"><span class="dot"></span>Nifty Scope</span>
     <span class="sub">by GetNifty</span>
   </a>
   <div class="count" id="count"></div>
@@ -468,44 +417,56 @@
 </header>
 
 <main class="stage">
-  <div class="box">
-    <span class="brc-tr"></span>
-    <span class="brc-br"></span>
-    <div class="card" id="card"></div>
-  </div>
+  <div class="card" id="card"></div>
 </main>
 
 <button class="nav-back hidden" id="backBtn" onclick="prev()">&larr; Back</button>
 
 <div class="footer-mini">
-  Your answers save locally as you go. Nothing is sent until you submit at the end. Built by <a href="https://getnifty.xyz" target="_blank" rel="noopener">GetNifty</a>.
+  Autosaves locally. Nothing is sent until you submit at the end. From <a href="https://getnifty.xyz" target="_blank" rel="noopener">GetNifty</a>.
 </div>
 
 <script>
-const STORAGE_KEY = "getnifty-scope-v1";
+const STORAGE_KEY = "getnifty-scope-v2";
+
+const BUCKETS = [
+  { id: 1, name: "Runs itself",           kicker: "Bucket 01", desc: "Handled start to finish. No touch needed." },
+  { id: 2, name: "Checked by a person",   kicker: "Bucket 02", desc: "Prepared for you, approved before it ships." },
+  { id: 3, name: "Stays with you",        kicker: "Bucket 03", desc: "The judgment calls. Only you can do it." },
+  { id: 4, name: "Stops happening",       kicker: "Bucket 04", desc: "Habit, not necessity. Kill it." }
+];
+
+const TASKS = [
+  { id: 'emails',     title: "Answering customer emails and inquiries" },
+  { id: 'followup',   title: "Following up with leads and prospects" },
+  { id: 'schedule',   title: "Scheduling appointments or jobs" },
+  { id: 'invoicing',  title: "Sending invoices and chasing payments" },
+  { id: 'social',     title: "Posting on social media" },
+  { id: 'content',    title: "Writing longer content (blog, newsletter, video scripts)" },
+  { id: 'reviews',    title: "Managing your Google Business Profile and reviews" },
+  { id: 'proposals',  title: "Drafting proposals and quotes" },
+  { id: 'bookkeeping',title: "Bookkeeping, expenses, receipts" },
+  { id: 'reporting',  title: "Weekly reporting (sales, ops, whatever your dashboard is)" }
+];
 
 const QUESTIONS = [
-  { id: 'business_name', type: 'text', num: '01', title: "What's your <em>business</em> called?", placeholder: "e.g. Alamo Roofing Co.", required: true },
-  { id: 'about', type: 'longtext', num: '02', title: "In one sentence, what do you <em>do</em>?", placeholder: "We help ..." },
-  { id: 'team', type: 'choice', num: '03', title: "How many people work with you?", options: ['Just me', '2-10', '11-50', '51-200', '200+'] },
-  { id: 'age', type: 'choice', num: '04', title: "How old is the business?", options: ['Under 1 year', '1-3 years', '3-10 years', '10-25 years', '25+ years'] },
-  { id: 'industry', type: 'text', num: '05', title: "What industry is it?", subtitle: "Say it however you'd say it out loud.", placeholder: "e.g. Local plumbing, B2B SaaS for accountants, DTC coffee..." },
-  { id: 'fire', type: 'multi', num: '06', title: "What's <em>on fire</em> right now?", subtitle: "Pick up to 3. What genuinely hurts.", max: 3, options: ['Not enough leads', 'Closing sales', 'Getting work done on time', 'Repetitive admin', 'Content & marketing', 'Hiring', 'Tech / website', 'Team communication', 'Reporting & measurement', 'Something else'] },
-  { id: 'wand', type: 'longtext', num: '07', title: "If we could take <em>one task</em> off your plate tomorrow, what would it be?", placeholder: "Be specific. The thing you dread." },
-  { id: 'stack', type: 'multi', num: '08', title: "What's in your daily stack?", subtitle: "Pick everything you actually use.", options: ['Google Workspace', 'Microsoft 365', 'Slack', 'Notion', 'Airtable', 'HubSpot', 'Salesforce', 'QuickBooks / Xero', 'Zapier / Make', 'WordPress', 'Shopify', 'Squarespace / Webflow', 'Google Business Profile', 'Meta Ads', 'Google Ads', 'Mailchimp / Klaviyo', 'Nothing formal', 'Other'] },
-  { id: 'intake', type: 'longtext', num: '09', title: "Walk me through what happens when a new customer <em>inquiry</em> comes in.", placeholder: "Where does it land, who touches it, what do they do..." },
-  { id: 'hours', type: 'choice', num: '10', title: "Hours a week spent on repetitive stuff that could probably be automated?", options: ['0-5', '5-15', '15-30', '30+', 'Way too many', 'Honestly no idea'] },
-  { id: 'repeats', type: 'longtext', num: '11', title: "What repeats every week or month that <em>shouldn't</em> be done by hand?", placeholder: "One per line if there's several..." },
-  { id: 'ai_use', type: 'choice', num: '12', title: "Are you using AI tools (ChatGPT, Claude, Gemini) in the business?", options: ['Every day', 'Sometimes', "Tried it, didn't stick", 'Not yet', 'What?'] },
-  { id: 'ai_want', type: 'multi', num: '13', title: "If we could <em>bolt AI</em> onto your business, what would move the needle?", subtitle: "Pick up to 4.", max: 4, options: ['Answer customer questions 24/7', 'Qualify inbound leads', 'Draft proposals & quotes', 'Summarize calls & emails', 'Write content (blog / social / email)', 'Schedule & book jobs', 'Voice AI answering phones', 'Analyze sales & ops data', 'AI-powered search on our site', 'Custom AI trained on our business', 'Not sure yet'] },
-  { id: 'site_age', type: 'choice', num: '14', title: "When did you last update your website?", options: ['This year', '1-2 years ago', '3-5 years ago', '5+ years ago', "Don't have one", "It's a mess"] },
-  { id: 'site_leads', type: 'choice', num: '15', title: "Is your website actually getting you leads?", options: ['A lot', 'A few here and there', 'Rarely', 'No', 'Honestly no idea'] },
-  { id: 'brand_feel', type: 'choice', num: '16', title: "How do you feel about your <em>brand</em>? Logo, look, messaging.", options: ['Love it', 'Fine, could be better', 'Embarrassed by it', "We don't really have one"] },
-  { id: 'content', type: 'longtext', num: '17', title: "What are you <em>publishing</em> today?", placeholder: "Blog? LinkedIn? Instagram? YouTube? Newsletter? Nothing?" },
-  { id: 'budget', type: 'choice', num: '18', title: "If we deliver value, what's this worth to you?", options: ['Under $2K one-time', '$2-10K one-time', '$10-50K one-time', '$500-2K/mo ongoing', '$2-10K/mo ongoing', '$10K+/mo ongoing', 'Not sure yet'] },
-  { id: 'timing', type: 'choice', num: '19', title: "When do you want to see the <em>first thing live</em>?", options: ['This week', 'This month', 'This quarter', "Whenever it's ready"] },
-  { id: 'outcome', type: 'longtext', num: '20', title: "The <em>one outcome</em> you'd measure to know this was worth it?", placeholder: "A number, a feeling, a moment..." },
-  { id: 'contact', type: 'contact', num: '21', title: "Where should we send your <em>fit report</em>?", subtitle: "Real email. No spam ever. Reply-only from Joe." }
+  { id: 'business_name', type: 'text',   num: '01', title: "What's your <em>business</em> called?", placeholder: "e.g. Alamo Roofing Co.", required: true },
+  { id: 'about',         type: 'text',   num: '02', title: "In one sentence, what do you do?", placeholder: "We help ..." },
+  { id: 'team',          type: 'choice', num: '03', title: "How many people work with you?", options: ['Just me', '2-10', '11-50', '51-200', '200+'] },
+  // 10 bucket-sort questions
+  ...TASKS.map((t, i) => ({
+    id: `task_${t.id}`,
+    type: 'bucket',
+    num: String(4 + i).padStart(2,'0'),
+    title: t.title,
+    subtitle: 'Which bucket does this belong in?',
+    taskId: t.id
+  })),
+  { id: 'custom_tasks', type: 'longtext', num: '14', title: "Anything else that eats your week?", subtitle: "The weird, specific recurring things. One per line.", placeholder: "e.g. Approving purchase orders every Friday\nManually copying leads from Instagram DMs" },
+  { id: 'dread',        type: 'longtext', num: '15', title: "The thing you <em>dread</em> most every week?", placeholder: "One specific task. Be honest." },
+  { id: 'budget',       type: 'choice',   num: '16', title: "If we made real progress, what's this worth to you?", options: ['Under $500/mo', '$500-2K/mo', '$2-5K/mo', '$5-10K/mo', '$10K+/mo', 'One-time project, not monthly', 'Not sure yet'] },
+  { id: 'timing',       type: 'choice',   num: '17', title: "When do you want the <em>first thing</em> live?", options: ['This week', 'This month', 'This quarter', "Whenever it's ready"] },
+  { id: 'contact',      type: 'contact',  num: '18', title: "Where should we send your <em>bucket report</em>?", subtitle: "Real email. No spam. Joe reads every one." }
 ];
 
 let state = load();
@@ -552,20 +513,20 @@ function render() {
 }
 
 function renderIntro() {
-  const resumeText = Object.keys(state.answers).length > 0 ? 'Resume' : 'Start scoping';
+  const resumeText = Object.keys(state.answers).length > 0 ? 'Resume where you left off' : 'Start the scope';
   document.getElementById('card').innerHTML = `
     <div class="intro">
-      <span class="eyebrow"><span class="dot"></span>21 questions &middot; 5 minutes &middot; no signup</span>
-      <h1>Where does <em>AI</em> actually fit in your business?</h1>
-      <p class="lead">Answer honestly. We'll score your answers into 5 buckets and highlight the two levers with the <strong>biggest payoff right now</strong>. Your fit report lands in your inbox when you finish.</p>
+      <span class="eyebrow"><span class="dot"></span>~5 minutes &middot; autosaves &middot; no signup</span>
+      <h1>Owners shouldn't have to <em>do</em> things.</h1>
+      <p class="lead">We'll walk through everything your business does in a week. You'll <strong>sort each task into one of four buckets</strong> - runs itself, checked by a person, stays with you, or stops happening. At the end, you get a real map of where your time actually goes.</p>
       <div class="action-row">
         <button class="ok" onclick="startOrResume()">${resumeText} <span>&rarr;</span></button>
         <span class="hint">Press <kbd>Enter</kbd></span>
       </div>
       <div class="stats">
-        <div><strong>5 min</strong> average</div>
-        <div><strong>Autosaves</strong> as you go</div>
-        <div><strong>Free</strong>, no signup</div>
+        <div><span class="dot"></span><strong>18 questions</strong> total</div>
+        <div><span class="dot"></span><strong>Autosaves</strong> as you go</div>
+        <div><span class="dot"></span><strong>Free</strong>, no signup</div>
       </div>
     </div>`;
   updateProgress();
@@ -579,47 +540,53 @@ function renderQuestion(q) {
   if (q.type === 'text') {
     body = `<div class="input-wrap"><input class="big" id="input" type="text" placeholder="${q.placeholder||''}" value="${escapeAttr(val||'')}"></div>`;
   } else if (q.type === 'longtext') {
-    body = `<textarea class="big" id="input" rows="3" placeholder="${q.placeholder||''}">${escapeText(val||'')}</textarea>`;
+    body = `<textarea class="big" id="input" rows="4" placeholder="${q.placeholder||''}">${escapeText(val||'')}</textarea>`;
   } else if (q.type === 'choice') {
     body = `<div class="choices">${q.options.map((opt, i) => {
       const sel = val === opt ? 'selected' : '';
       const key = String.fromCharCode(65 + i);
       return `<div class="choice ${sel}" data-value="${escapeAttr(opt)}" onclick="pickSingle('${escapeAttr(opt)}')"><span class="key">${key}</span><span class="label">${opt}</span><span class="check">&#10003;</span></div>`;
     }).join('')}</div>`;
-  } else if (q.type === 'multi') {
-    const selected = Array.isArray(val) ? val : [];
-    body = `<div class="choices">${q.options.map((opt, i) => {
-      const sel = selected.includes(opt) ? 'selected' : '';
+  } else if (q.type === 'bucket') {
+    body = `<div class="bucket-grid">${BUCKETS.map((b, i) => {
+      const sel = val === b.id ? 'selected' : '';
       const key = String.fromCharCode(65 + i);
-      return `<div class="choice ${sel}" data-value="${escapeAttr(opt)}" onclick="pickMulti('${escapeAttr(opt)}', ${q.max||99})"><span class="key">${key}</span><span class="label">${opt}</span><span class="check">&#10003;</span></div>`;
-    }).join('')}</div>${q.max ? `<div class="cap-note">Up to ${q.max}.</div>` : ''}`;
+      return `<div class="bkt ${sel}" data-value="${b.id}" onclick="pickBucket(${b.id})">
+        <div class="kicker"><span class="dot"></span>${b.kicker}<span class="key">${key}</span></div>
+        <h3>${b.name}</h3>
+        <p>${b.desc}</p>
+      </div>`;
+    }).join('')}</div>`;
   } else if (q.type === 'contact') {
     const c = val || {};
     body = `<div class="form-grid">
       <div class="field"><label>Your name</label><input id="ct_name" type="text" value="${escapeAttr(c.name||'')}" placeholder="Full name"></div>
       <div class="field"><label>Email</label><input id="ct_email" type="email" value="${escapeAttr(c.email||'')}" placeholder="you@company.com"></div>
       <div class="field"><label>Phone (optional)</label><input id="ct_phone" type="tel" value="${escapeAttr(c.phone||'')}" placeholder="(555) 555-1234"></div>
-      <div class="field"><label>Best time to reach you (optional)</label><input id="ct_time" type="text" value="${escapeAttr(c.time||'')}" placeholder="Mornings CT"></div>
+      <div class="field"><label>Best time to reach you</label><input id="ct_time" type="text" value="${escapeAttr(c.time||'')}" placeholder="Mornings CT"></div>
     </div>`;
   }
 
   const isLast = state.i === QUESTIONS.length - 1;
+  const buttonLabel = isLast ? 'See my bucket report' : 'OK';
   card.innerHTML = `
-    <div class="qnum"><span class="badge">${q.num} / ${String(QUESTIONS.length).padStart(2,'0')}</span>${q.required ? '<span class="req">&middot; required</span>' : ''}</div>
+    <div class="qnum">
+      <span class="num">${q.num}</span>
+      <span class="dot">&middot;</span>
+      <span>${q.type === 'bucket' ? 'Sort into a bucket' : 'Question'}</span>
+      ${q.required ? '<span class="req">&middot; required</span>' : ''}
+    </div>
     <h1 class="q">${q.title}</h1>
     ${q.subtitle ? `<p class="subtitle">${q.subtitle}</p>` : ''}
     ${body}
     <div class="action-row">
-      <button class="ok" id="okBtn" onclick="${isLast ? 'finish()' : 'next()'}">${isLast ? 'See my fit report' : 'OK'} <span>&rarr;</span></button>
-      <span class="hint">${q.type === 'longtext' ? 'Press <kbd>Shift</kbd>+<kbd>Enter</kbd> for new line' : 'Press <kbd>Enter</kbd>'}</span>
+      <button class="ok" id="okBtn" onclick="${isLast ? 'finish()' : 'next()'}">${buttonLabel} <span>&rarr;</span></button>
+      <span class="hint">${q.type === 'longtext' ? '<kbd>Shift</kbd>+<kbd>Enter</kbd> for new line' : q.type === 'bucket' ? 'Press <kbd>A</kbd>-<kbd>D</kbd>' : 'Press <kbd>Enter</kbd>'}</span>
     </div>`;
 
   const input = document.getElementById('input');
   if (input) {
-    input.addEventListener('input', () => {
-      state.answers[q.id] = input.value;
-      save();
-    });
+    input.addEventListener('input', () => { state.answers[q.id] = input.value; save(); });
     setTimeout(() => input.focus(), 60);
   }
   ['ct_name','ct_email','ct_phone','ct_time'].forEach(id => {
@@ -652,21 +619,14 @@ function pickSingle(val) {
   setTimeout(next, 240);
 }
 
-function pickMulti(val, max) {
+function pickBucket(bucketId) {
   const q = QUESTIONS[state.i];
-  const cur = Array.isArray(state.answers[q.id]) ? state.answers[q.id] : [];
-  const idx = cur.indexOf(val);
-  if (idx >= 0) {
-    cur.splice(idx, 1);
-  } else {
-    if (cur.length >= max) return;
-    cur.push(val);
-  }
-  state.answers[q.id] = cur;
+  state.answers[q.id] = bucketId;
   save();
-  document.querySelectorAll('.choice').forEach(el => {
-    el.classList.toggle('selected', cur.includes(el.dataset.value));
+  document.querySelectorAll('.bkt').forEach(el => {
+    el.classList.toggle('selected', String(bucketId) === el.dataset.value);
   });
+  setTimeout(next, 260);
 }
 
 function next() {
@@ -716,18 +676,16 @@ function finish() {
   state.done = true;
   save();
 
-  // Submit to Netlify form (fire-and-forget)
-  const scores = score(state.answers);
-  const summary = buildSummary(state.answers, scores);
+  const buckets = groupByBucket(state.answers);
+  const summary = buildSummary(state.answers, buckets);
   const body = new URLSearchParams({
-    'form-name': 'nifty-scope',
+    'form-name': 'nifty-scope-v2',
     'business_name': state.answers.business_name || '',
     'email': c.email || '',
     'contact_name': c.name || '',
     'phone': c.phone || '',
-    'best_time': c.time || '',
+    'buckets_json': JSON.stringify(buckets),
     'answers_json': JSON.stringify(state.answers),
-    'scores_json': JSON.stringify(scores),
     'summary_md': summary
   });
   fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
@@ -737,97 +695,40 @@ function finish() {
   render();
 }
 
-/* ---------- Scoring ---------- */
-function score(a) {
-  const s = { ai: 0, auto: 0, web: 0, brand: 0, content: 0 };
-
-  // AI
-  if (Array.isArray(a.ai_want)) s.ai += a.ai_want.filter(x => x !== 'Not sure yet').length * 2;
-  if (a.ai_use === 'Every day') s.ai += 2;
-  if (a.ai_use === 'Sometimes') s.ai += 1;
-  if (a.ai_use === 'Not yet' || a.ai_use === 'What?') s.ai += 1;
-  if (Array.isArray(a.fire)) {
-    if (a.fire.includes('Reporting & measurement')) s.ai += 1;
-    if (a.fire.includes('Team communication')) s.ai += 1;
+/* ---------- Grouping ---------- */
+function groupByBucket(a) {
+  const groups = { 1: [], 2: [], 3: [], 4: [] };
+  TASKS.forEach(t => {
+    const bId = a[`task_${t.id}`];
+    if (bId && groups[bId]) groups[bId].push(t.title);
+  });
+  const customText = (a.custom_tasks || '').trim();
+  if (customText) {
+    customText.split('\n').filter(Boolean).forEach(line => {
+      groups[3].push(line.trim() + ' (your own)');
+    });
   }
-
-  // Automation
-  const highHours = { '15-30': 4, '30+': 5, 'Way too many': 5, '5-15': 2 };
-  if (highHours[a.hours]) s.auto += highHours[a.hours];
-  if (Array.isArray(a.fire) && a.fire.includes('Repetitive admin')) s.auto += 3;
-  if (typeof a.repeats === 'string' && a.repeats.trim().length > 15) s.auto += 2;
-  if (typeof a.intake === 'string' && a.intake.trim().length > 40) s.auto += 1;
-  if (typeof a.wand === 'string' && a.wand.trim().length > 15) s.auto += 1;
-
-  // Web
-  const webWeights = { 'This year': 0, '1-2 years ago': 1, '3-5 years ago': 3, '5+ years ago': 4, "Don't have one": 5, "It's a mess": 5 };
-  s.web += webWeights[a.site_age] || 0;
-  const leadWeights = { 'A lot': 0, 'A few here and there': 1, 'Rarely': 3, 'No': 4, 'Honestly no idea': 3 };
-  s.web += leadWeights[a.site_leads] || 0;
-  if (Array.isArray(a.fire) && a.fire.includes('Tech / website')) s.web += 2;
-  if (Array.isArray(a.fire) && a.fire.includes('Not enough leads')) s.web += 1;
-
-  // Brand
-  const brandWeights = { 'Love it': 0, 'Fine, could be better': 2, 'Embarrassed by it': 5, "We don't really have one": 5 };
-  s.brand += brandWeights[a.brand_feel] || 0;
-
-  // Content
-  const c = (a.content || '').toLowerCase();
-  if (!c || c.includes('nothing') || c.includes('none') || c.trim().length < 15) s.content += 3;
-  if (Array.isArray(a.fire) && a.fire.includes('Content & marketing')) s.content += 3;
-  if (Array.isArray(a.fire) && a.fire.includes('Not enough leads')) s.content += 2;
-  if (Array.isArray(a.ai_want) && a.ai_want.includes('Write content (blog / social / email)')) s.content += 1;
-
-  return s;
+  return groups;
 }
 
-const BUCKET_META = {
-  ai:      { icon: '&#129504;', title: 'AI Ops',           blurb: (a) => aiBlurb(a) },
-  auto:    { icon: '&#9889;',   title: 'Automation',       blurb: (a) => autoBlurb(a) },
-  web:     { icon: '&#128421;', title: 'Web Dev',          blurb: (a) => webBlurb(a) },
-  brand:   { icon: '&#127912;', title: 'Brand & Design',   blurb: (a) => brandBlurb(a) },
-  content: { icon: '&#128203;', title: 'Content & SEO',    blurb: (a) => contentBlurb(a) }
-};
-
-function aiBlurb(a) {
-  const picks = Array.isArray(a.ai_want) ? a.ai_want.filter(x => x !== 'Not sure yet') : [];
-  if (picks.length === 0) return 'Fast-follow surface. Start with an AI assistant trained on your top FAQs and docs. Ship a 1-week pilot, measure deflection, expand.';
-  return 'You already named the plays: <strong>' + picks.slice(0, 3).join(', ') + '</strong>. We build these as scoped 2-4 week sprints with clear KPIs.';
-}
-function autoBlurb(a) {
-  const bits = [];
-  if (a.wand) bits.push(`the "${(a.wand||'').slice(0,60)}${a.wand?.length>60?'...':''}" task`);
-  const bit = bits.length ? bits[0] : 'the top 3 weekly repeats';
-  return `Kill the busywork. We map your intake + delivery flow, then automate ${bit} first. Typical win: 5-15 hrs/week returned inside 30 days.`;
-}
-function webBlurb(a) {
-  if (a.site_age === "Don't have one") return 'You need a site. We ship modern static + CMS in 2-3 weeks. Fast, SEO-ready, converts.';
-  if (a.site_age === '5+ years ago' || a.site_age === "It's a mess") return 'Rebuild time. Current site is a drag on trust and search. 2-4 week rebuild, lifts conversion + rankings.';
-  return 'Site tune-up. Fix conversion path, speed, structured data, and lead capture. Usually 1-2 weeks.';
-}
-function brandBlurb(a) {
-  if (a.brand_feel === "We don't really have one" || a.brand_feel === 'Embarrassed by it') return 'Brand refresh unlocks the rest. Logo, voice, palette, and messaging. 2-3 week sprint, then applied everywhere else we build.';
-  return 'Not urgent. Tighten a few edges (photography, palette, elevator pitch), lean on other levers first.';
-}
-function contentBlurb(a) {
-  return 'You need consistent output where buyers search. 2 pillar posts/mo + repurpose engine (LinkedIn, GBP posts, AI answer engines). We can ghost-write and publish, or hand you the machine.';
-}
-
-function buildSummary(a, s) {
+function buildSummary(a, buckets) {
   const brand = a.business_name || 'Your business';
-  const ranked = Object.entries(s).sort((x,y) => y[1]-x[1]);
   const lines = [];
   lines.push(`# Nifty Scope report - ${brand}`);
   lines.push('');
-  lines.push('## Scores');
-  ranked.forEach(([k,v]) => lines.push(`- **${BUCKET_META[k].title}:** ${v}`));
-  lines.push('');
+  BUCKETS.forEach(b => {
+    lines.push(`## ${b.kicker} - ${b.name}`);
+    const items = buckets[b.id] || [];
+    if (items.length === 0) lines.push('_(empty)_');
+    else items.forEach(x => lines.push(`- ${x}`));
+    lines.push('');
+  });
   lines.push('## Answers');
   QUESTIONS.forEach(q => {
     const v = a[q.id];
     if (v == null || v === '') return;
+    if (q.type === 'bucket') return;
     let val = v;
-    if (Array.isArray(v)) val = v.join(', ');
     if (typeof v === 'object') val = Object.entries(v).map(([k,x])=>`${k}: ${x}`).join(' | ');
     lines.push(`- **${q.title.replace(/<[^>]+>/g,'')}** ${val}`);
   });
@@ -835,54 +736,62 @@ function buildSummary(a, s) {
 }
 
 function renderResult() {
-  const s = score(state.answers);
-  const ranked = Object.entries(s).sort((x,y) => y[1] - x[1]);
-  const max = Math.max(1, ...Object.values(s));
-  const top2 = ranked.slice(0, 2).map(([k]) => k);
-
+  const buckets = groupByBucket(state.answers);
   const brand = state.answers.business_name || 'your business';
-  const email = state.answers.contact?.email || '';
+  const b1 = buckets[1].length;
+  const b2 = buckets[2].length;
+  const b3 = buckets[3].length;
+  const b4 = buckets[4].length;
+  const totalOff = b1 + b2 + b4;
+  const total = b1 + b2 + b3 + b4;
 
-  const cards = ranked.map(([k, v], i) => {
-    const meta = BUCKET_META[k];
-    const pct = Math.round((v / max) * 100);
-    const label = i === 0 ? 'Top priority' : (i === 1 ? 'Second priority' : (v > 0 ? 'Also worth doing' : 'Not urgent'));
-    const cls = i === 0 ? 'hot' : '';
-    const pillCls = i < 2 ? '' : (v > 0 ? 'warm' : 'cool');
-    return `<div class="b-card ${cls}">
-      <div class="head">
-        <span class="icon">${meta.icon}</span>
-        <h3>${meta.title}</h3>
-        <span class="pill ${pillCls}">${label}</span>
+  const bucketCards = BUCKETS.map(b => {
+    const items = buckets[b.id] || [];
+    const isPick = (b.id === 1 || b.id === 2);
+    const tag = b.id === 1 ? 'GETNIFTY BUILDS' : b.id === 2 ? 'GETNIFTY CHECKS' : b.id === 3 ? 'YOURS TO KEEP' : "LET'S KILL";
+    return `<div class="r-bucket ${isPick ? 'pick' : ''}">
+      <div class="kicker">
+        <span class="dot"></span>${b.kicker}
+        <span class="tag">${tag}</span>
       </div>
-      <p>${meta.blurb(state.answers)}</p>
-      <div class="meter"><span style="width:${pct}%"></span></div>
+      <h3>${b.name}</h3>
+      <div class="count-line">${items.length} ${items.length === 1 ? 'task' : 'tasks'}</div>
+      ${items.length === 0 ? '<div class="empty">Nothing here yet</div>' : `<ul>${items.map(x => `<li>${escapeText(x)}</li>`).join('')}</ul>`}
     </div>`;
   }).join('');
 
-  const submitNote = state.submitted === false ? '<div class="saved-note err">Couldn\'t send your report over the wire. Your data is saved locally - export below and email it to joe@getnifty.xyz.</div>' :
-    (state.submitted ? `<div class="saved-note">Sent to Joe at GetNifty. If you gave an email (${email}), we'll reply within 1 business day.</div>` : '');
+  const dreadNote = state.answers.dread ? `<p style="margin-top:10px;font-size:15px;color:var(--muted);"><em>You said the thing you dread most is:</em> "${escapeText(state.answers.dread)}"</p>` : '';
+
+  const submitNote = state.submitted === false
+    ? '<div class="saved-note err">Couldn\'t send your report over the wire. Your data is saved locally - export below and email it to joe@getnifty.xyz.</div>'
+    : (state.submitted ? `<div class="saved-note">Sent to Joe. If you gave an email (${escapeText(state.answers.contact?.email || '')}), we'll reply within 1 business day.</div>` : '');
 
   document.getElementById('card').innerHTML = `
     <div class="result">
-      <div class="qnum"><span class="badge">FIT REPORT</span></div>
-      <h1>Here's where <em>${escapeText(brand)}</em> gets the biggest lift.</h1>
-      <p class="lede">Ranked by pain, opportunity, and readiness. Two levers matter most right now. Focus there.</p>
-      <div class="bucket-list">${cards}</div>
+      <div class="qnum">
+        <span class="num">04</span>
+        <span class="dot">&middot;</span>
+        <span>Your bucket report</span>
+      </div>
+      <h1>Here's how <em>${escapeText(brand)}</em>'s week actually sorts.</h1>
+      <p class="lede">Out of ${total} tasks we walked through, <strong>${totalOff} could come off your plate</strong>. That's what "runs itself" and "checked by a person" plus "stops happening" adds up to.</p>
+      ${dreadNote}
+      <div class="result-bucket-grid">${bucketCards}</div>
       <div class="result-cta">
-        <h3>Want us to <em>build</em> the top two?</h3>
-        <p>20-minute working session with Joe. We scope the top 2, price them, and tell you if we're a fit. No slide deck, no pressure.</p>
+        <div class="kicker">Ready to make it real?</div>
+        <h3>20 minutes with Joe - we scope buckets 1 &amp; 2 and give you a price.</h3>
+        <p>No slide deck, no pressure. We'll tell you if it's a fit and what it costs to run. If it's not a fit, we'll tell you that too.</p>
         <div class="row">
-          <a class="btn" href="mailto:joe@getnifty.xyz?subject=Nifty Scope report - ${encodeURIComponent(brand)}&body=${encodeURIComponent('Hi Joe, I finished the Nifty Scope. Top buckets: ' + top2.map(k=>BUCKET_META[k].title).join(' + ') + '. Let\'s book time.')}">Email Joe <span>&rarr;</span></a>
+          <a class="btn" href="mailto:joe@getnifty.xyz?subject=Nifty Scope report - ${encodeURIComponent(brand)}&body=${encodeURIComponent('Hi Joe, I finished the Nifty Scope. Buckets 1 (runs itself) + 2 (checked by a person) came out to ' + (b1+b2) + ' tasks. Let\'s book time.')}">Email Joe &rarr;</a>
           <a class="btn ghost" href="https://getnifty.xyz" target="_blank" rel="noopener">See GetNifty</a>
         </div>
       </div>
       ${submitNote}
       <div class="result-actions">
-        <button onclick="downloadJSON()">&#8681; Download JSON</button>
-        <button onclick="downloadMarkdown()">&#8681; Download Markdown</button>
-        <button onclick="window.print()">&#128424; Print</button>
-        <button onclick="resetAll()">&#8635; Start over</button>
+        <button onclick="downloadJSON()">Download JSON</button>
+        <button onclick="downloadMarkdown()">Download Markdown</button>
+        <button onclick="window.print()">Print</button>
+        <button onclick="resetAll()">Start over</button>
       </div>
     </div>`;
   updateProgress();
@@ -890,14 +799,14 @@ function renderResult() {
 
 /* ---------- Exports ---------- */
 function downloadJSON() {
-  const payload = { business: state.answers.business_name || '', answers: state.answers, scores: score(state.answers), savedAt: state.savedAt };
+  const payload = { business: state.answers.business_name || '', answers: state.answers, buckets: groupByBucket(state.answers), savedAt: state.savedAt };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  download(blob, slug() + '-scope.json');
+  download(blob, slug() + '-buckets.json');
 }
 function downloadMarkdown() {
-  const md = buildSummary(state.answers, score(state.answers));
+  const md = buildSummary(state.answers, groupByBucket(state.answers));
   const blob = new Blob([md], { type: 'text/markdown' });
-  download(blob, slug() + '-scope.md');
+  download(blob, slug() + '-buckets.md');
 }
 function download(blob, name) {
   const url = URL.createObjectURL(blob);
@@ -934,12 +843,17 @@ document.addEventListener('keydown', (e) => {
     if (state.i === QUESTIONS.length - 1) finish(); else next();
   } else if (e.key === 'Escape' && q.type !== 'contact') {
     prev();
-  } else if (q.type === 'choice' || q.type === 'multi') {
+  } else if (q.type === 'choice') {
     const idx = e.key.toUpperCase().charCodeAt(0) - 65;
     if (idx >= 0 && idx < q.options.length && !e.metaKey && !e.ctrlKey && !e.altKey) {
       e.preventDefault();
-      if (q.type === 'choice') pickSingle(q.options[idx]);
-      else pickMulti(q.options[idx], q.max || 99);
+      pickSingle(q.options[idx]);
+    }
+  } else if (q.type === 'bucket') {
+    const idx = e.key.toUpperCase().charCodeAt(0) - 65;
+    if (idx >= 0 && idx < 4 && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      e.preventDefault();
+      pickBucket(BUCKETS[idx].id);
     }
   }
 });

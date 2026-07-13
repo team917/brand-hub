@@ -20,7 +20,7 @@
   to = "/hub.html"
   status = 200
 
-# Nifty Scope
+# Nifty Scope (four buckets - current)
 [[redirects]]
   from = "/scope/start"
   to = "/scope/start.html"
@@ -29,4 +29,10 @@
 [[redirects]]
   from = "/scope/app"
   to = "/scope/start.html"
+  status = 200
+
+# Nifty Scope Classic (service-buckets version - archived)
+[[redirects]]
+  from = "/scope-classic/start"
+  to = "/scope-classic/start.html"
   status = 200
