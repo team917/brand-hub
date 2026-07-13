@@ -338,6 +338,106 @@
   }
   .r-bucket .empty { color: var(--muted); font-style: italic; font-size: 14px; }
 
+  /* Impact x Risk quadrant */
+  .matrix-card {
+    background: var(--panel); border: 1px solid var(--line-soft); border-radius: 14px;
+    padding: 24px 26px 28px; margin: 8px 0 30px;
+  }
+  .matrix-card .kicker {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .14em;
+    margin-bottom: 6px;
+  }
+  .matrix-card .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+  .matrix-card h3 {
+    margin: 0 0 6px;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: 24px; letter-spacing: -.015em; line-height: 1.2;
+  }
+  .matrix-card .lede {
+    margin: 0 0 22px; color: var(--muted); font-size: 14.5px;
+  }
+  .matrix-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;
+  }
+  @media (max-width: 640px) { .matrix-wrap { grid-template-columns: 1fr; } }
+  .matrix {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: #fff;
+    border: 1px solid var(--line-soft);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .matrix::before, .matrix::after {
+    content: ""; position: absolute; background: var(--line-soft);
+  }
+  .matrix::before { left: 50%; top: 24px; bottom: 24px; width: 1px; }
+  .matrix::after { top: 50%; left: 24px; right: 24px; height: 1px; }
+  .matrix .axis {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .12em;
+  }
+  .matrix .axis.y-top    { top: 6px; left: 50%; transform: translateX(-50%); }
+  .matrix .axis.y-bot    { bottom: 6px; left: 50%; transform: translateX(-50%); }
+  .matrix .axis.x-left   { left: 6px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: left center; }
+  .matrix .axis.x-right  { right: 6px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: right center; }
+  .matrix .quad-label {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px; color: var(--muted-soft);
+    text-transform: uppercase; letter-spacing: .1em;
+    padding: 4px 6px;
+    max-width: 42%;
+  }
+  .matrix .quad-label.tl { top: 30px; left: 30px; }
+  .matrix .quad-label.tr { top: 30px; right: 30px; text-align: right; }
+  .matrix .quad-label.bl { bottom: 30px; left: 30px; }
+  .matrix .quad-label.br { bottom: 30px; right: 30px; text-align: right; }
+  .matrix .pin {
+    position: absolute; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--mint); border: 3px solid var(--panel-2);
+    box-shadow: 0 0 0 2px var(--mint), 0 4px 12px rgba(72,184,152,.4);
+    transform: translate(-50%, -50%);
+    transition: all .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .verdict {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .verdict .tag {
+    align-self: flex-start;
+    background: var(--mint); color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; font-weight: 700;
+    padding: 5px 10px; border-radius: 4px;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+  .verdict h4 {
+    margin: 0;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: 22px; letter-spacing: -.015em; line-height: 1.15;
+  }
+  .verdict p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+  .verdict .facts {
+    display: grid; grid-template-columns: 1fr; gap: 8px;
+    margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--line-soft);
+  }
+  .verdict .facts .row {
+    display: flex; align-items: baseline; gap: 10px;
+    font-size: 13px;
+  }
+  .verdict .facts .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted); font-size: 10.5px;
+    text-transform: uppercase; letter-spacing: .1em;
+    min-width: 76px;
+  }
+  .verdict .facts .val { color: var(--ink); font-weight: 500; }
+
   .result-cta {
     background: var(--ink); color: var(--panel); border-radius: 16px;
     padding: 34px; margin: 32px 0 20px;
@@ -450,23 +550,46 @@ const TASKS = [
 ];
 
 const QUESTIONS = [
+  // Phase 1 - Business context
   { id: 'business_name', type: 'text',   num: '01', title: "What's your <em>business</em> called?", placeholder: "e.g. Alamo Roofing Co.", required: true },
-  { id: 'about',         type: 'text',   num: '02', title: "In one sentence, what do you do?", placeholder: "We help ..." },
-  { id: 'team',          type: 'choice', num: '03', title: "How many people work with you?", options: ['Just me', '2-10', '11-50', '51-200', '200+'] },
-  // 10 bucket-sort questions
+  { id: 'industry',      type: 'text',   num: '02', title: "What industry or trade?", subtitle: "Say it how you'd say it out loud.", placeholder: "e.g. Local plumbing, B2B SaaS for accountants, DTC coffee..." },
+  { id: 'about',         type: 'text',   num: '03', title: "In one sentence, what do you <em>actually do</em>?", placeholder: "We help ..." },
+  { id: 'model',         type: 'choice', num: '04', title: "How do customers pay you?", options: ['Per job / project', 'Monthly retainer / subscription', 'Per product sold', 'Hourly / time & materials', 'Commission', 'Mix of the above'] },
+  { id: 'team',          type: 'choice', num: '05', title: "How many people work with you?", options: ['Just me', '2-5', '6-15', '16-50', '51-200', '200+'] },
+  { id: 'revenue',       type: 'choice', num: '06', title: "Annual revenue?", subtitle: "Ballpark. Skip if you'd rather.", options: ['Under $100K', '$100K-500K', '$500K-2M', '$2M-10M', '$10M+', 'Prefer not to say'] },
+
+  // Phase 2 - Current state
+  { id: 'ai_use',      type: 'choice', num: '07', title: "Are you using <em>AI tools</em> in the business today?", options: ['Every day', 'Sometimes', "Tried it, didn't stick", 'Not yet', 'What?'] },
+  { id: 'stack',       type: 'multi',  num: '08', title: "What's in your <em>daily stack</em>?", subtitle: "Pick everything the team actually opens.", options: ['Google Workspace', 'Microsoft 365', 'Slack', 'Notion', 'Airtable', 'HubSpot', 'Salesforce', 'QuickBooks / Xero', 'Zapier / Make', 'WordPress', 'Shopify', 'Squarespace / Webflow', 'Google Business Profile', 'Meta Ads', 'Google Ads', 'Mailchimp / Klaviyo', 'Nothing formal', 'Other'] },
+  { id: 'bottleneck',  type: 'multi',  num: '09', title: "Biggest <em>bottleneck</em> right now?", subtitle: "Pick up to 2.", max: 2, options: ['Not enough leads', 'Closing sales', 'Delivering work on time', 'Team drowning in admin', 'Content & marketing', 'Hiring & training', 'Tech / website', 'Reporting & measurement', 'I am the bottleneck'] },
+  { id: 'hours',       type: 'choice', num: '10', title: "Hours a week the team spends on <em>repetitive stuff</em> that could probably be automated?", options: ['0-5', '5-15', '15-30', '30+', 'Way too many', 'Honestly no idea'] },
+
+  // Phase 3 - Bucket sort (10 tasks)
   ...TASKS.map((t, i) => ({
     id: `task_${t.id}`,
     type: 'bucket',
-    num: String(4 + i).padStart(2,'0'),
+    num: String(11 + i).padStart(2,'0'),
     title: t.title,
     subtitle: 'Which bucket does this belong in?',
     taskId: t.id
   })),
-  { id: 'custom_tasks', type: 'longtext', num: '14', title: "Anything else that eats your week?", subtitle: "The weird, specific recurring things. One per line.", placeholder: "e.g. Approving purchase orders every Friday\nManually copying leads from Instagram DMs" },
-  { id: 'dread',        type: 'longtext', num: '15', title: "The thing you <em>dread</em> most every week?", placeholder: "One specific task. Be honest." },
-  { id: 'budget',       type: 'choice',   num: '16', title: "If we made real progress, what's this worth to you?", options: ['Under $500/mo', '$500-2K/mo', '$2-5K/mo', '$5-10K/mo', '$10K+/mo', 'One-time project, not monthly', 'Not sure yet'] },
-  { id: 'timing',       type: 'choice',   num: '17', title: "When do you want the <em>first thing</em> live?", options: ['This week', 'This month', 'This quarter', "Whenever it's ready"] },
-  { id: 'contact',      type: 'contact',  num: '18', title: "Where should we send your <em>bucket report</em>?", subtitle: "Real email. No spam. Joe reads every one." }
+
+  // Phase 4 - Score the top pain (Impact x Risk)
+  { id: 'top_pains',   type: 'multi',  num: '21', title: "Of what you just sorted, which is <em>costing you the most</em> right now?", subtitle: "Pick up to 3. Ranked from most painful.", max: 3, options: TASKS.map(t => t.title) },
+  { id: 'top_hours',   type: 'choice', num: '22', title: "How much time does your <em>#1 painful task</em> eat per week?", subtitle: "Across the whole team.", options: ['Under 1 hr', '1-3 hrs', '3-8 hrs', '8-20 hrs', '20+ hrs'] },
+  { id: 'top_impact',  type: 'choice', num: '23', title: "If that #1 task ran <em>flawlessly</em> - what's the impact?", subtitle: "Time back, revenue, sanity, growth. Your call.", options: ['Minor lift', 'Meaningful', 'Big deal', 'Game-changer'] },
+  { id: 'top_risk',    type: 'choice', num: '24', title: "If AI gets that #1 task <em>wrong</em> - what's the fallout?", subtitle: "Cost, customers, reputation, legal.", options: ['No big deal', 'Annoying but fixable', 'Expensive to unwind', 'Catastrophic'] },
+  { id: 'top_owner',   type: 'choice', num: '25', title: "Who <em>does it now</em>?", options: ['I do', 'One employee', 'The whole team', 'A contractor', 'It falls through the cracks'] },
+
+  // Phase 5 - Own words
+  { id: 'custom_tasks', type: 'longtext', num: '26', title: "Anything else that <em>eats your week</em>?", subtitle: "Weird, specific, recurring. One per line.", placeholder: "e.g. Approving purchase orders every Friday\nManually copying leads from Instagram DMs" },
+  { id: 'dread',        type: 'longtext', num: '27', title: "The thing you <em>dread</em> most every week?", placeholder: "One specific task. Be honest." },
+  { id: 'outcome',      type: 'longtext', num: '28', title: "The <em>one outcome</em> you'd measure to know this was worth it?", placeholder: "A number, a moment, a feeling..." },
+
+  // Phase 6 - Fit + contact
+  { id: 'budget',  type: 'choice',  num: '29', title: "If we made real progress, what's this <em>worth</em> to you?", options: ['Under $500/mo', '$500-2K/mo', '$2-5K/mo', '$5-10K/mo', '$10K+/mo', 'One-time project, not monthly', 'Not sure yet'] },
+  { id: 'timing',  type: 'choice',  num: '30', title: "When do you want the <em>first thing</em> live?", options: ['This week', 'This month', 'This quarter', "Whenever it's ready"] },
+  { id: 'contact', type: 'contact', num: '31', title: "Where should we send your <em>bucket report</em>?", subtitle: "Real email. No spam. Joe reads every one." }
 ];
 
 let state = load();
@@ -516,17 +639,17 @@ function renderIntro() {
   const resumeText = Object.keys(state.answers).length > 0 ? 'Resume where you left off' : 'Start the scope';
   document.getElementById('card').innerHTML = `
     <div class="intro">
-      <span class="eyebrow"><span class="dot"></span>~5 minutes &middot; autosaves &middot; no signup</span>
+      <span class="eyebrow"><span class="dot"></span>~7 minutes &middot; autosaves &middot; no signup</span>
       <h1>Owners shouldn't have to <em>do</em> things.</h1>
-      <p class="lead">We'll walk through everything your business does in a week. You'll <strong>sort each task into one of four buckets</strong> - runs itself, checked by a person, stays with you, or stops happening. At the end, you get a real map of where your time actually goes.</p>
+      <p class="lead">We'll walk through everything your business does in a week and <strong>sort each task into one of four buckets</strong> - runs itself, checked by a person, stays with you, or stops happening. Then we score your #1 pain on impact and risk, so you get a real map, not a fluffy quiz.</p>
       <div class="action-row">
         <button class="ok" onclick="startOrResume()">${resumeText} <span>&rarr;</span></button>
         <span class="hint">Press <kbd>Enter</kbd></span>
       </div>
       <div class="stats">
-        <div><span class="dot"></span><strong>18 questions</strong> total</div>
-        <div><span class="dot"></span><strong>Autosaves</strong> as you go</div>
-        <div><span class="dot"></span><strong>Free</strong>, no signup</div>
+        <div><span class="dot"></span><strong>31 questions</strong>, mostly one-tap</div>
+        <div><span class="dot"></span><strong>Impact &times; Risk</strong> on your top pain</div>
+        <div><span class="dot"></span><strong>Autosaves</strong>, no signup</div>
       </div>
     </div>`;
   updateProgress();
@@ -547,6 +670,13 @@ function renderQuestion(q) {
       const key = String.fromCharCode(65 + i);
       return `<div class="choice ${sel}" data-value="${escapeAttr(opt)}" onclick="pickSingle('${escapeAttr(opt)}')"><span class="key">${key}</span><span class="label">${opt}</span><span class="check">&#10003;</span></div>`;
     }).join('')}</div>`;
+  } else if (q.type === 'multi') {
+    const selected = Array.isArray(val) ? val : [];
+    body = `<div class="choices">${q.options.map((opt, i) => {
+      const sel = selected.includes(opt) ? 'selected' : '';
+      const key = String.fromCharCode(65 + i);
+      return `<div class="choice ${sel}" data-value="${escapeAttr(opt)}" onclick="pickMulti('${escapeAttr(opt)}', ${q.max||99})"><span class="key">${key}</span><span class="label">${opt}</span><span class="check">&#10003;</span></div>`;
+    }).join('')}</div>${q.max ? `<div class="hint" style="margin-top:12px;">Up to ${q.max}. Press <kbd>Enter</kbd> when done.</div>` : '<div class="hint" style="margin-top:12px;">Press <kbd>Enter</kbd> when done.</div>'}`;
   } else if (q.type === 'bucket') {
     body = `<div class="bucket-grid">${BUCKETS.map((b, i) => {
       const sel = val === b.id ? 'selected' : '';
@@ -617,6 +747,23 @@ function pickSingle(val) {
     el.classList.toggle('selected', el.dataset.value === val);
   });
   setTimeout(next, 240);
+}
+
+function pickMulti(val, max) {
+  const q = QUESTIONS[state.i];
+  const cur = Array.isArray(state.answers[q.id]) ? state.answers[q.id] : [];
+  const idx = cur.indexOf(val);
+  if (idx >= 0) {
+    cur.splice(idx, 1);
+  } else {
+    if (cur.length >= max) return;
+    cur.push(val);
+  }
+  state.answers[q.id] = cur;
+  save();
+  document.querySelectorAll('.choice').forEach(el => {
+    el.classList.toggle('selected', cur.includes(el.dataset.value));
+  });
 }
 
 function pickBucket(bucketId) {
@@ -735,6 +882,75 @@ function buildSummary(a, buckets) {
   return lines.join('\n');
 }
 
+function renderMatrix(a) {
+  const impactMap = { 'Minor lift': 0, 'Meaningful': 1, 'Big deal': 2, 'Game-changer': 3 };
+  const riskMap   = { 'No big deal': 0, 'Annoying but fixable': 1, 'Expensive to unwind': 2, 'Catastrophic': 3 };
+  const iv = impactMap[a.top_impact];
+  const rv = riskMap[a.top_risk];
+  if (iv == null || rv == null) return '';
+
+  const highI = iv >= 2;
+  const highR = rv >= 2;
+
+  let tag, name, blurb;
+  if (highI && !highR) {
+    tag = 'AUTOMATE HARD';
+    name = "Runs itself. Ship it.";
+    blurb = "High impact, low blast radius. This is the ideal Bucket 01 candidate - automate end-to-end with confidence. Fastest ROI in your business.";
+  } else if (highI && highR) {
+    tag = 'HYBRID - HUMAN IN THE LOOP';
+    name = "Checked by a person before it ships.";
+    blurb = "High reward but real downside if it slips. Draft with AI, approve with a human. This is Bucket 02 - the workhorse of a well-run AI stack.";
+  } else if (!highI && highR) {
+    tag = 'LEAVE IT ALONE';
+    name = "Not worth the risk.";
+    blurb = "Small upside, real downside. Keep this fully human until either the upside grows or the risk shrinks. Don't be a hero here.";
+  } else {
+    tag = 'KILL IT';
+    name = "Stop doing this altogether.";
+    blurb = "Low impact and low risk means low priority. Ask honestly whether this task should exist at all. The cheapest task is the one nobody has to do.";
+  }
+
+  const pinX = 12 + (rv / 3) * 76;
+  const pinY = 12 + (1 - iv / 3) * 76;
+
+  const top = Array.isArray(a.top_pains) ? a.top_pains[0] : null;
+  const painLine = top ? `<span class="val">${escapeText(top)}</span>` : '<span class="val" style="color:var(--muted-soft);font-style:italic;">Unspecified</span>';
+  const hoursLine = a.top_hours ? `<span class="val">${escapeText(a.top_hours)}</span>` : '<span class="val" style="color:var(--muted-soft);">-</span>';
+  const ownerLine = a.top_owner ? `<span class="val">${escapeText(a.top_owner)}</span>` : '<span class="val" style="color:var(--muted-soft);">-</span>';
+
+  return `
+    <div class="matrix-card">
+      <div class="kicker"><span class="dot"></span>Impact &times; Risk on your #1 pain</div>
+      <h3>${name}</h3>
+      <p class="lede">Where your most costly task lands on the audit matrix - and how to treat it.</p>
+      <div class="matrix-wrap">
+        <div class="matrix">
+          <div class="axis y-top">High impact</div>
+          <div class="axis y-bot">Low impact</div>
+          <div class="axis x-left">Low risk</div>
+          <div class="axis x-right">High risk</div>
+          <div class="quad-label tl">Automate hard</div>
+          <div class="quad-label tr">Hybrid HITL</div>
+          <div class="quad-label bl">Kill or ignore</div>
+          <div class="quad-label br">Leave alone</div>
+          <div class="pin" style="left:${pinX}%;top:${pinY}%"></div>
+        </div>
+        <div class="verdict">
+          <span class="tag">${tag}</span>
+          <p>${blurb}</p>
+          <div class="facts">
+            <div class="row"><span class="lbl">Top pain</span>${painLine}</div>
+            <div class="row"><span class="lbl">Impact</span><span class="val">${escapeText(a.top_impact)}</span></div>
+            <div class="row"><span class="lbl">Risk</span><span class="val">${escapeText(a.top_risk)}</span></div>
+            <div class="row"><span class="lbl">Hours/wk</span>${hoursLine}</div>
+            <div class="row"><span class="lbl">Owner now</span>${ownerLine}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
 function renderResult() {
   const buckets = groupByBucket(state.answers);
   const brand = state.answers.business_name || 'your business';
@@ -762,6 +978,8 @@ function renderResult() {
 
   const dreadNote = state.answers.dread ? `<p style="margin-top:10px;font-size:15px;color:var(--muted);"><em>You said the thing you dread most is:</em> "${escapeText(state.answers.dread)}"</p>` : '';
 
+  const matrixHtml = renderMatrix(state.answers);
+
   const submitNote = state.submitted === false
     ? '<div class="saved-note err">Couldn\'t send your report over the wire. Your data is saved locally - export below and email it to joe@getnifty.xyz.</div>'
     : (state.submitted ? `<div class="saved-note">Sent to Joe. If you gave an email (${escapeText(state.answers.contact?.email || '')}), we'll reply within 1 business day.</div>` : '');
@@ -777,6 +995,7 @@ function renderResult() {
       <p class="lede">Out of ${total} tasks we walked through, <strong>${totalOff} could come off your plate</strong>. That's what "runs itself" and "checked by a person" plus "stops happening" adds up to.</p>
       ${dreadNote}
       <div class="result-bucket-grid">${bucketCards}</div>
+      ${matrixHtml}
       <div class="result-cta">
         <div class="kicker">Ready to make it real?</div>
         <h3>20 minutes with Joe - we scope buckets 1 &amp; 2 and give you a price.</h3>
@@ -848,6 +1067,12 @@ document.addEventListener('keydown', (e) => {
     if (idx >= 0 && idx < q.options.length && !e.metaKey && !e.ctrlKey && !e.altKey) {
       e.preventDefault();
       pickSingle(q.options[idx]);
+    }
+  } else if (q.type === 'multi') {
+    const idx = e.key.toUpperCase().charCodeAt(0) - 65;
+    if (idx >= 0 && idx < q.options.length && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      e.preventDefault();
+      pickMulti(q.options[idx], q.max || 99);
     }
   } else if (q.type === 'bucket') {
     const idx = e.key.toUpperCase().charCodeAt(0) - 65;
