@@ -1,0 +1,1102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Nifty AI Program - A 12-month AI transformation for large companies | GetNifty</title>
+<meta name="description" content="A 12-month program that turns large companies into AI-native ones. We educate, audit, build, deploy, and train. Six-month version available. Peer-to-peer, plain, no hype.">
+<meta property="og:title" content="The Nifty AI Program - 12 months to AI-native">
+<meta property="og:description" content="Educate. Audit. Build. Deploy. Train. Twelve months from now, AI runs your busywork and your teams trust it. Or six, if you want the compressed run.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='24' fill='%230f9d8d'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --parchment: #d7d7d0;
+    --cream: #f7f6f3;
+    --bone: #fdfcfa;
+    --paper: #f4f2ed;
+    --bistre: #1a1614;
+    --bistre-soft: #2e2924;
+    --muted: #6f6a62;
+    --muted-soft: #8c877e;
+    --line: #c9c5b9;
+    --line-soft: #e0dcd0;
+    --teal: #21d9c7;
+    --teal-deep: #0f9d8d;
+    --teal-bright: #2ee6d3;
+    --teal-soft: #d5f4ef;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: var(--cream); color: var(--bistre);
+    font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+    font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body { overflow-x: hidden; }
+  a { color: var(--bistre); }
+  ::selection { background: var(--teal-deep); color: var(--bone); }
+
+  /* Subtle grain */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(215,215,208,.35), transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(212,236,229,.28), transparent 55%);
+  }
+
+  header.topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(247,246,243,.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .topwrap { max-width: 1200px; margin: 0 auto; padding: 20px 32px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: baseline; gap: 12px; text-decoration: none; color: inherit; }
+  .brand .glyph {
+    width: 24px; height: 24px; display: inline-block;
+    background-image: radial-gradient(circle at center, var(--teal-deep) 22%, transparent 24%);
+  }
+  .brand .mark {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: 26px; letter-spacing: -.01em;
+  }
+  .brand .sub {
+    color: var(--muted); font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+    text-transform: uppercase; letter-spacing: .12em;
+  }
+  .top-actions { margin-left: auto; display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+  .top-actions a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--bistre); }
+  .top-actions a.cta {
+    background: var(--bistre); color: var(--bone);
+    padding: 11px 20px; border-radius: 999px; font-weight: 500;
+    transition: background .18s ease, transform .12s ease;
+  }
+  .top-actions a.cta:hover { background: #000; transform: translateY(-1px); }
+
+  /* Section labels */
+  .section-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .18em;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .section-label.left { justify-content: flex-start; }
+
+  /* Hero */
+  .hero { max-width: 1080px; margin: 0 auto; padding: 90px 32px 40px; text-align: center; }
+  h1.display {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(56px, 8.5vw, 120px);
+    line-height: 1.0; letter-spacing: -.02em;
+    margin: 26px auto 30px;
+    max-width: 14ch;
+    color: var(--bistre);
+  }
+  h1.display em { font-style: italic; color: var(--teal-deep); }
+  .lead {
+    font-size: 20px; color: var(--bistre-soft); max-width: 720px; margin: 0 auto 44px;
+    line-height: 1.55;
+  }
+  .lead strong { color: var(--bistre); font-weight: 500; }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 30px; border-radius: 999px;
+    font-weight: 500; font-size: 15.5px;
+    text-decoration: none; border: 1px solid transparent; cursor: pointer;
+    transition: transform .12s ease, background .18s ease, color .18s ease;
+    font-family: 'Geist', sans-serif;
+    letter-spacing: -.005em;
+  }
+  .btn.primary { background: var(--bistre); color: var(--bone); }
+  .btn.primary:hover { background: #000; transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--bistre); border-color: var(--bistre); }
+  .btn.ghost:hover { background: var(--bistre); color: var(--bone); }
+  .btn.teal { background: var(--teal-deep); color: var(--bone); }
+  .btn.teal:hover { background: #0d8577; }
+  .btn .arrow { transition: transform .18s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .hero-facts {
+    display: flex; gap: 32px; margin-top: 40px; justify-content: center;
+    color: var(--muted); font-size: 13px; flex-wrap: wrap;
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: .04em;
+  }
+  .hero-facts div { display: flex; align-items: center; gap: 8px; }
+  .hero-facts .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal-deep); }
+  .hero-facts strong { color: var(--bistre); font-weight: 500; }
+
+  /* Sections */
+  section { max-width: 1200px; margin: 0 auto; padding: 80px 32px; }
+  section .head { text-align: center; margin-bottom: 56px; }
+  section .head.left { text-align: left; }
+  section h2 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(38px, 5.6vw, 68px);
+    line-height: 1.04; letter-spacing: -.02em;
+    margin: 20px auto 22px; max-width: 22ch;
+    color: var(--bistre);
+  }
+  section h2 em { font-style: italic; color: var(--teal-deep); }
+  section .lede {
+    color: var(--muted); font-size: 18px; max-width: 720px; margin: 0 auto;
+    line-height: 1.65;
+  }
+  section .lede strong { color: var(--bistre); font-weight: 500; }
+  section .head.left h2, section .head.left .lede { margin-left: 0; }
+
+  /* Problem strip */
+  .problem-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px;
+  }
+  @media (max-width: 900px) { .problem-grid { grid-template-columns: 1fr; } }
+  .problem {
+    background: var(--paper); border: 1px solid var(--line-soft); border-radius: 14px;
+    padding: 28px;
+  }
+  .problem .kicker {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .14em;
+    margin-bottom: 18px;
+  }
+  .problem .kicker .n {
+    background: var(--bistre); color: var(--teal-bright);
+    padding: 2px 8px; border-radius: 3px; letter-spacing: .06em;
+  }
+  .problem h3 {
+    margin: 0 0 12px;
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: 26px; letter-spacing: -.01em; line-height: 1.15;
+  }
+  .problem p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+
+  /* Phase overview */
+  .phase-grid {
+    display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px;
+  }
+  @media (max-width: 900px) { .phase-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .phase-grid { grid-template-columns: 1fr; } }
+  .phase {
+    background: var(--bone); border: 1px solid var(--line-soft); border-radius: 14px;
+    padding: 24px 22px 26px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .phase .kicker {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .14em;
+  }
+  .phase .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-deep); }
+  .phase h3 {
+    margin: 0;
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: 24px; letter-spacing: -.01em; line-height: 1.2;
+  }
+  .phase .months { color: var(--muted); font-size: 13px; font-family: 'Geist Mono', monospace; letter-spacing: .05em; }
+  .phase p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+
+  /* Syllabus */
+  .syllabus { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .month {
+    background: var(--bone); border: 1px solid var(--line-soft); border-radius: 14px;
+    padding: 28px 32px;
+    display: grid; grid-template-columns: 120px 1fr; gap: 32px; align-items: start;
+  }
+  @media (max-width: 700px) { .month { grid-template-columns: 1fr; gap: 16px; padding: 24px; } }
+  .month .m-left {
+    display: flex; flex-direction: column; gap: 8px; align-items: flex-start;
+  }
+  .month .m-num {
+    font-family: 'Geist Mono', monospace; font-weight: 600;
+    font-size: 13px; color: var(--muted);
+    background: var(--paper); border: 1px solid var(--line-soft);
+    padding: 4px 8px; border-radius: 4px; letter-spacing: .08em;
+  }
+  .month .m-phase {
+    font-family: 'Geist Mono', monospace; font-size: 10.5px;
+    color: var(--teal-deep); text-transform: uppercase; letter-spacing: .12em;
+    padding: 2px 0;
+  }
+  .month h3 {
+    margin: 0 0 8px;
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: 30px; letter-spacing: -.015em; line-height: 1.15;
+  }
+  .month h3 em { font-style: italic; color: var(--teal-deep); }
+  .month p.summary { margin: 0 0 18px; color: var(--muted); font-size: 15.5px; line-height: 1.65; max-width: 62ch; }
+  .month .m-detail {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  @media (max-width: 720px) { .month .m-detail { grid-template-columns: 1fr; } }
+  .m-detail .col h4 {
+    margin: 0 0 8px;
+    font-family: 'Geist Mono', monospace; font-size: 10.5px;
+    color: var(--muted); text-transform: uppercase; letter-spacing: .14em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .m-detail .col h4 .dash { width: 12px; height: 1px; background: var(--muted); }
+  .m-detail ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .m-detail ul li {
+    font-size: 14.5px; color: var(--bistre); line-height: 1.5;
+    padding-left: 14px; position: relative;
+  }
+  .m-detail ul li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 1.5px; background: var(--teal-deep);
+  }
+
+  /* Half-year card */
+  .half-year {
+    background: var(--bistre); color: var(--bone);
+    border-radius: 20px; padding: 60px 48px; margin: 20px 0 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  }
+  @media (max-width: 800px) { .half-year { grid-template-columns: 1fr; padding: 44px 32px; } }
+  .half-year .kicker {
+    font-family: 'Geist Mono', monospace;
+    color: var(--teal-bright); font-size: 12px; font-weight: 500;
+    letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .half-year h3 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(34px, 4.4vw, 46px); line-height: 1.05;
+    letter-spacing: -.015em; margin: 0 0 18px; color: var(--bone);
+  }
+  .half-year h3 em { font-style: italic; color: var(--teal-bright); }
+  .half-year p { color: #c8c2b8; font-size: 16px; line-height: 1.6; margin: 0 0 24px; }
+  .half-year ul {
+    margin: 0 0 26px; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .half-year ul li {
+    font-size: 14.5px; color: var(--bone); line-height: 1.5;
+    padding-left: 16px; position: relative;
+  }
+  .half-year ul li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 8px; height: 1.5px; background: var(--teal-bright);
+  }
+  .half-year .btn.teal { background: var(--teal); color: var(--bistre); }
+  .half-year .btn.teal:hover { background: var(--teal-bright); }
+  .half-year .compare {
+    background: rgba(46, 230, 211, .08);
+    border: 1px solid rgba(46, 230, 211, .25);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .half-year .compare h4 {
+    font-family: 'Geist Mono', monospace; font-size: 11px;
+    color: var(--teal-bright); text-transform: uppercase; letter-spacing: .12em;
+    margin: 0 0 14px;
+  }
+  .half-year .compare table { width: 100%; border-collapse: collapse; }
+  .half-year .compare td {
+    padding: 8px 0; border-bottom: 1px solid rgba(215,215,208,.15);
+    font-size: 13.5px; color: #c8c2b8; vertical-align: top;
+  }
+  .half-year .compare td:last-child { text-align: right; color: var(--bone); font-family: 'Geist Mono', monospace; font-size: 12.5px; }
+  .half-year .compare tr:last-child td { border-bottom: none; }
+
+  /* Included */
+  .included-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px;
+  }
+  @media (max-width: 780px) { .included-grid { grid-template-columns: 1fr; } }
+  .included {
+    background: var(--bone); border: 1px solid var(--line-soft); border-radius: 14px;
+    padding: 26px 28px;
+  }
+  .included h4 {
+    margin: 0 0 8px;
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: 22px; letter-spacing: -.01em; line-height: 1.2;
+  }
+  .included p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+  .included .kicker {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .14em;
+    margin-bottom: 14px;
+  }
+  .included .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-deep); }
+
+  /* Who it's for */
+  .who {
+    background: var(--paper); border-radius: 20px;
+    padding: 60px 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 44px;
+  }
+  @media (max-width: 800px) { .who { grid-template-columns: 1fr; padding: 44px 28px; } }
+  .who h3 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(28px, 3.8vw, 38px); line-height: 1.1;
+    letter-spacing: -.015em; margin: 0 0 14px;
+  }
+  .who h3 em { font-style: italic; color: var(--teal-deep); }
+  .who .col.no h3 em { color: #b35a1f; }
+  .who ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .who ul li {
+    font-size: 15px; color: var(--bistre); line-height: 1.55;
+    padding-left: 18px; position: relative;
+  }
+  .who .yes ul li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 8px; height: 1.5px; background: var(--teal-deep);
+  }
+  .who .no ul li::before {
+    content: "x"; position: absolute; left: 0; top: -1px;
+    font-family: 'Geist Mono', monospace; color: #b35a1f; font-weight: 600;
+  }
+
+  /* FAQ */
+  .faq { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .faq details {
+    background: var(--bone); border: 1px solid var(--line-soft); border-radius: 12px;
+    padding: 4px 24px;
+  }
+  .faq summary {
+    cursor: pointer; padding: 20px 0;
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; letter-spacing: -.01em; line-height: 1.2;
+    list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; font-family: 'Geist Mono', monospace; color: var(--muted);
+    font-size: 18px; transition: transform .2s ease;
+  }
+  .faq details[open] summary::after { content: "-"; }
+  .faq details p { color: var(--muted); font-size: 15.5px; line-height: 1.65; margin: 0 0 20px; padding-top: 4px; border-top: 1px solid var(--line-soft); padding: 18px 0 20px; }
+
+  /* Final CTA */
+  .final { max-width: 1200px; margin: 0 auto 60px; padding: 0 32px; }
+  .final-inner {
+    background: var(--bistre); color: var(--bone);
+    border-radius: 24px; padding: 80px 56px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .final-inner::before {
+    content: ""; position: absolute; top: -60%; right: -20%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,230,211,.16), transparent 65%);
+  }
+  .final-inner .kicker {
+    font-family: 'Geist Mono', monospace;
+    color: var(--teal-bright); font-size: 12px; font-weight: 500;
+    letter-spacing: .16em; text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .final-inner h2 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(40px, 5.6vw, 68px); line-height: 1.02; letter-spacing: -.02em;
+    margin: 0 auto 24px; max-width: 22ch; color: var(--bone);
+  }
+  .final-inner h2 em { font-style: italic; color: var(--teal-bright); }
+  .final-inner p {
+    color: #b8b2a7; font-size: 17px; max-width: 560px; margin: 0 auto 34px;
+    line-height: 1.6;
+  }
+  .final-inner .btn.primary { background: var(--teal); color: var(--bistre); }
+  .final-inner .btn.primary:hover { background: var(--teal-bright); }
+  .final-inner .btn.ghost { color: var(--bone); border-color: var(--bone); }
+  .final-inner .btn.ghost:hover { background: var(--bone); color: var(--bistre); }
+  .final-inner .row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  footer.foot {
+    max-width: 1200px; margin: 0 auto; padding: 32px 32px 60px;
+    color: var(--muted); font-size: 12.5px;
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    border-top: 1px solid var(--line-soft);
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: .04em;
+  }
+  footer.foot a { color: var(--muted); text-decoration: underline; }
+
+  /* Utility */
+  .keyline {
+    display: block; height: 1px; background: var(--line-soft); margin: 0 auto; max-width: 1200px;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topwrap">
+    <a class="brand" href="./">
+      <span class="glyph"></span>
+      <span class="mark">Nifty</span>
+      <span class="sub">AI Program</span>
+    </a>
+    <div class="top-actions">
+      <a href="#phases">The phases</a>
+      <a href="#syllabus">Syllabus</a>
+      <a href="#half">Six-month</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="mailto:joe@getnifty.xyz?subject=Nifty AI Program - I want to talk">Book a conversation &rarr;</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="section-label">
+    <span>01</span>
+    <span>&middot;</span>
+    <span>The Nifty AI Program</span>
+  </div>
+  <h1 class="display">Twelve months to <em>AI-native</em>.</h1>
+  <p class="lead">
+    A structured program for large companies serious about putting AI where it earns its keep. We <strong>educate</strong> your executives, <strong>audit</strong> your processes, <strong>build</strong> the workflows, <strong>deploy</strong> them into your teams, and <strong>train</strong> the humans until the whole thing runs without us.
+  </p>
+  <div class="cta-row">
+    <a class="btn primary" href="mailto:joe@getnifty.xyz?subject=Nifty AI Program - Book a conversation">Book a conversation <span class="arrow">&rarr;</span></a>
+    <a class="btn ghost" href="#syllabus">See the twelve months</a>
+  </div>
+  <div class="hero-facts">
+    <div><span class="dot"></span><strong>12 or 6 months</strong></div>
+    <div><span class="dot"></span><strong>4 phases</strong>: learn, audit, build, hand off</div>
+    <div><span class="dot"></span>Peer-to-peer, plain, <strong>no hype</strong></div>
+  </div>
+</div>
+
+<span class="keyline"></span>
+
+<section id="problem">
+  <div class="head">
+    <div class="section-label"><span>02</span><span>&middot;</span><span>Why this exists</span></div>
+    <h2>You watched a consultant sell your competitor a <em>deck</em>. We built the working system.</h2>
+    <p class="lede">Large companies keep buying AI strategy from firms that leave when the slides are approved. Then the workflows never ship, the teams never trust the outputs, and the executives quietly shelve it. The Nifty Program was built to <strong>replace that pattern.</strong></p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem">
+      <div class="kicker"><span class="n">01</span>The consultant problem</div>
+      <h3>Strategy without execution is just paper.</h3>
+      <p>Big firms bill for slides. Your competitor got a beautiful roadmap and a Sharepoint folder. We show up to build the workflows the roadmap points to and stay through deployment.</p>
+    </div>
+    <div class="problem">
+      <div class="kicker"><span class="n">02</span>The tool problem</div>
+      <h3>Buying software doesn't change behavior.</h3>
+      <p>Enterprise Copilot licenses gather dust until someone teaches teams what to actually do with them, and gives them workflows that survive contact with real work.</p>
+    </div>
+    <div class="problem">
+      <div class="kicker"><span class="n">03</span>The trust problem</div>
+      <h3>AI without governance breaks quietly.</h3>
+      <p>The first hallucinated invoice, the first offensive draft email, the first mis-tagged customer - and the whole program dies. We design the human-in-the-loop before we ship the workflow.</p>
+    </div>
+  </div>
+</section>
+
+<span class="keyline"></span>
+
+<section id="phases">
+  <div class="head">
+    <div class="section-label"><span>03</span><span>&middot;</span><span>The four phases</span></div>
+    <h2>Learn. Audit. Build. Hand off.</h2>
+    <p class="lede">Same shape whether you pick twelve months or six. Six months compresses build and skips the second wave.</p>
+  </div>
+  <div class="phase-grid">
+    <div class="phase">
+      <div class="kicker"><span class="dot"></span>Phase 01</div>
+      <div class="months">Months 01-03</div>
+      <h3>Learn</h3>
+      <p>Executive AI literacy, then process mapping, then a full Impact x Risk audit. You leave phase one with a signed roadmap.</p>
+    </div>
+    <div class="phase">
+      <div class="kicker"><span class="dot"></span>Phase 02</div>
+      <div class="months">Months 04-06</div>
+      <h3>Build Round One</h3>
+      <p>Two workflows shipped end-to-end: one fastest-ROI, one hybrid HITL. Pilot teams trained. Q2 metrics locked in.</p>
+    </div>
+    <div class="phase">
+      <div class="kicker"><span class="dot"></span>Phase 03</div>
+      <div class="months">Months 07-09</div>
+      <h3>Build Round Two</h3>
+      <p>Cross-functional and customer-facing workflows. Center of Excellence spun up. Second wave of teams trained.</p>
+    </div>
+    <div class="phase">
+      <div class="kicker"><span class="dot"></span>Phase 04</div>
+      <div class="months">Months 10-12</div>
+      <h3>Hand off</h3>
+      <p>Governance, measurement dashboard, internal ownership, runbooks. We leave. The program keeps running.</p>
+    </div>
+  </div>
+</section>
+
+<span class="keyline"></span>
+
+<section id="syllabus">
+  <div class="head">
+    <div class="section-label"><span>04</span><span>&middot;</span><span>Month-by-month</span></div>
+    <h2>The twelve months, in full.</h2>
+    <p class="lede">Every month has a working outcome and a signed deliverable. No months disappear into "strategy work."</p>
+  </div>
+
+  <div class="syllabus">
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 01</span>
+        <span class="m-phase">Phase 01 &middot; Learn</span>
+      </div>
+      <div>
+        <h3><em>Executive literacy.</em> What AI can and can't do, honestly.</h3>
+        <p class="summary">Two half-day workshops with your C-suite and department heads. Grounded case studies from analogous companies. Honest failure modes. We finish with your leadership team speaking the same language about AI and aligned on what "good" looks like.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Two executive workshops (half-day each)</li>
+              <li>Analogous case study briefing (your industry)</li>
+              <li>Common-failure walkthrough</li>
+              <li>Kick-off weekly office hours</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Executive AI briefing book (org-specific)</li>
+              <li>Shared vocabulary and success criteria</li>
+              <li>Named program sponsor + steering committee</li>
+              <li>Weekly office-hour cadence live</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 02</span>
+        <span class="m-phase">Phase 01 &middot; Learn</span>
+      </div>
+      <div>
+        <h3><em>Process mapping.</em> Every workflow, every system, every dataset.</h3>
+        <p class="summary">Interviews and shadow sessions across departments. We map the actual work, not the org chart. Data landscape and system inventory get built in parallel. This is the foundation everything else stands on.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>30-60 workflow interviews (per department scope)</li>
+              <li>Shadow sessions with front-line teams</li>
+              <li>Data inventory: what lives where, who owns it</li>
+              <li>System inventory: stack, integrations, tech debt</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Process atlas (every candidate workflow, documented)</li>
+              <li>Data map and ownership register</li>
+              <li>System diagram and integration surface</li>
+              <li>Named workflow owners per department</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 03</span>
+        <span class="m-phase">Phase 01 &middot; Learn</span>
+      </div>
+      <div>
+        <h3><em>Impact x Risk audit.</em> Verdict on every workflow. Locked.</h3>
+        <p class="summary">We score every candidate workflow on impact if it works and risk if AI gets it wrong. Verdicts assigned: automate hard, hybrid HITL, leave alone, or kill it. Top twelve workflows ranked for build order. You leave phase one with a signed twelve-month roadmap.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Score every workflow: impact and risk</li>
+              <li>Assign verdict on each: automate / hybrid / leave / kill</li>
+              <li>Rank top 12 build candidates</li>
+              <li>Present findings to executive committee</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Signed audit report</li>
+              <li>Ranked build roadmap (months 4-12)</li>
+              <li>Kill list: workflows to stop doing</li>
+              <li>Executive sponsor commitment for build phase</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 04</span>
+        <span class="m-phase">Phase 02 &middot; Build R1</span>
+      </div>
+      <div>
+        <h3><em>Sprint 01.</em> Fastest ROI, lowest risk. Ship it.</h3>
+        <p class="summary">Highest-impact, lowest-risk workflow gets built end-to-end. Full stack: data pipes, orchestration, model layer, human handoffs, dashboards. Deployed to a pilot team by month-end. First real proof.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Build workflow #1 end-to-end</li>
+              <li>Data plumbing + orchestration</li>
+              <li>Model layer + guardrails</li>
+              <li>Pilot deploy to one team</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Workflow #1 live and running</li>
+              <li>Measurement dashboard v1</li>
+              <li>Pilot team trained</li>
+              <li>Baseline metrics captured</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 05</span>
+        <span class="m-phase">Phase 02 &middot; Build R1</span>
+      </div>
+      <div>
+        <h3><em>Sprint 02.</em> First hybrid HITL. Where AI drafts, humans decide.</h3>
+        <p class="summary">Higher-impact, higher-risk workflow. Human-in-the-loop by design: AI prepares, a human approves, the audit trail is airtight. This is the workflow shape that survives contact with real enterprise governance.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Build workflow #2 with HITL from day one</li>
+              <li>Approval checkpoint design</li>
+              <li>Escalation logic + audit trail</li>
+              <li>Broader team rollout</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Workflow #2 live with HITL</li>
+              <li>Draft governance framework</li>
+              <li>Approval SLAs and escalation paths</li>
+              <li>Two workflows now generating measurable outcomes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 06</span>
+        <span class="m-phase">Phase 02 &middot; Build R1</span>
+      </div>
+      <div>
+        <h3><em>Team training wave 1.</em> Trust, operate, push back.</h3>
+        <p class="summary">Pilot teams get trained not just to use the workflows, but to operate them, question them, and push back when they're wrong. Change management: shift the routines, kill the legacy tasks, celebrate the wins. Half-year retrospective and roadmap adjustment.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Live training sessions per pilot team</li>
+              <li>Change-management coaching for managers</li>
+              <li>Kill legacy tasks that the workflows replaced</li>
+              <li>Six-month retrospective with sponsors</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Team playbook (per workflow)</li>
+              <li>Recorded training library</li>
+              <li>Q2 metrics report</li>
+              <li>Adjusted roadmap for phase 03</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 07</span>
+        <span class="m-phase">Phase 03 &middot; Build R2</span>
+      </div>
+      <div>
+        <h3><em>Sprint 03.</em> Cross-functional workflow. Two departments, one system.</h3>
+        <p class="summary">Workflow that spans two or more departments. Shared source of truth, handoff logic, notification and status rules. This is the workflow shape where AI unlocks the most and where org politics get real.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Build cross-functional workflow #3</li>
+              <li>Handoff and notification design</li>
+              <li>Joint deploy across two departments</li>
+              <li>Stakeholder alignment sessions</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Workflow #3 live across two departments</li>
+              <li>Cross-functional org playbook</li>
+              <li>Shared metrics dashboard</li>
+              <li>Political muscle for the harder wins to come</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 08</span>
+        <span class="m-phase">Phase 03 &middot; Build R2</span>
+      </div>
+      <div>
+        <h3><em>Sprint 04.</em> First customer-facing workflow. Tone and safety, tight.</h3>
+        <p class="summary">AI touches the customer directly: support, quoting, scheduling, marketing, onboarding. Voice, tone, brand-safety, and escalation are scoped before we ship. This is the highest-visibility risk we take, so we take it carefully.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Build customer-facing workflow #4</li>
+              <li>Brand voice + safety framework</li>
+              <li>Escalation and handoff-to-human rules</li>
+              <li>Staged rollout with kill switch</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Workflow #4 live, customer-facing</li>
+              <li>Customer safety framework</li>
+              <li>CX metrics + NPS baseline</li>
+              <li>Public proof point for the whole program</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 09</span>
+        <span class="m-phase">Phase 03 &middot; Build R2</span>
+      </div>
+      <div>
+        <h3><em>Team training wave 2 + Center of Excellence.</em></h3>
+        <p class="summary">Second wave of teams gets trained on the workflows. In parallel we stand up your internal Center of Excellence: named champions from every department who own the program after we leave. The org starts to have opinions about AI, not just consumption.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Train second-wave teams (all four workflows)</li>
+              <li>Charter the Center of Excellence</li>
+              <li>Recruit and onboard department champions</li>
+              <li>First internal proposal review</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>CoE charter + champion cohort</li>
+              <li>Q3 metrics report</li>
+              <li>Internal proposal pipeline forming</li>
+              <li>Company voice on AI, not just a vendor voice</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 10</span>
+        <span class="m-phase">Phase 04 &middot; Hand off</span>
+      </div>
+      <div>
+        <h3><em>Governance and measurement.</em> The system that outlasts us.</h3>
+        <p class="summary">Formal governance framework: who proposes new workflows, who approves, who kill-switches. Measurement dashboard becomes the boardroom view: hours saved, dollars saved, customer NPS, workflow uptime, incidents. This is what makes the program defensible when the CFO asks.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Formal governance framework + approval rules</li>
+              <li>Executive-level measurement dashboard</li>
+              <li>Incident/kill-switch procedures</li>
+              <li>ROI report, mid-year draft</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Signed governance document</li>
+              <li>Live boardroom dashboard</li>
+              <li>Incident-response runbook</li>
+              <li>Board-ready ROI narrative</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 11</span>
+        <span class="m-phase">Phase 04 &middot; Hand off</span>
+      </div>
+      <div>
+        <h3><em>Independence.</em> Your team drives. We ride shotgun.</h3>
+        <p class="summary">Internal team takes primary ownership of every workflow. We move to support role: on-call for incidents, monthly reviews, quarterly strategy checkpoints. Documentation and runbooks get finalized so nothing is trapped in our heads.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Full ownership transfer to internal team</li>
+              <li>Runbook library completed</li>
+              <li>On-call rotation designed</li>
+              <li>Support-tier engagement mode kicks in</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Complete runbook library</li>
+              <li>On-call schedule and escalation tree</li>
+              <li>Support SLA with GetNifty (year 2 optional)</li>
+              <li>Internal team confident on all four workflows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month">
+      <div class="m-left">
+        <span class="m-num">M 12</span>
+        <span class="m-phase">Phase 04 &middot; Hand off</span>
+      </div>
+      <div>
+        <h3><em>Retrospective + Year 2 roadmap.</em></h3>
+        <p class="summary">Full-year executive retrospective. ROI report signed. Year 2 roadmap prepared: extend, spin down, or hand off entirely. We are transparent about what worked, what didn't, and where the next dollar of AI investment earns the most.</p>
+        <div class="m-detail">
+          <div class="col">
+            <h4><span class="dash"></span>What we do</h4>
+            <ul>
+              <li>Full-year executive retrospective</li>
+              <li>Signed ROI report</li>
+              <li>Year 2 roadmap options</li>
+              <li>Formal program close-out</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4><span class="dash"></span>You leave with</h4>
+            <ul>
+              <li>Signed year-one report</li>
+              <li>Three-option year-two roadmap</li>
+              <li>Written case study (internal + optional external)</li>
+              <li>A company that runs on AI without needing us</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<span class="keyline"></span>
+
+<section id="half">
+  <div class="head">
+    <div class="section-label"><span>05</span><span>&middot;</span><span>The half-year option</span></div>
+    <h2>Six months if you want to <em>prove it fast</em>.</h2>
+    <p class="lede">Same shape, compressed. You still get audit, two shipped workflows, and team training. What you skip is the second build wave, the Center of Excellence, and the formal governance handoff.</p>
+  </div>
+
+  <div class="half-year">
+    <div>
+      <div class="kicker">Six-month program</div>
+      <h3>Prove the model in <em>half the time</em>.</h3>
+      <p>Best for companies that want to pilot the Nifty approach before committing to a full year, or that already have internal AI capacity and just need a working audit plus two workflows shipped.</p>
+      <ul>
+        <li>Full Impact x Risk audit (months 1-2)</li>
+        <li>Two workflows shipped end-to-end (months 3-5)</li>
+        <li>Team training + retrospective (month 6)</li>
+        <li>Roadmap for extension into the full year, if you want it</li>
+      </ul>
+      <a class="btn teal" href="mailto:joe@getnifty.xyz?subject=Nifty AI Program - The Half Year">Ask about the half-year <span class="arrow">&rarr;</span></a>
+    </div>
+    <div class="compare">
+      <h4>Twelve vs Six</h4>
+      <table>
+        <tr><td>Impact x Risk audit</td><td>Both</td></tr>
+        <tr><td>Workflows shipped</td><td>4 vs 2</td></tr>
+        <tr><td>Team training waves</td><td>2 vs 1</td></tr>
+        <tr><td>Center of Excellence</td><td>Yes / No</td></tr>
+        <tr><td>Governance handoff</td><td>Yes / Light</td></tr>
+        <tr><td>Executive retrospective</td><td>Yes / Yes</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<span class="keyline"></span>
+
+<section id="included">
+  <div class="head">
+    <div class="section-label"><span>06</span><span>&middot;</span><span>What's included</span></div>
+    <h2>Not a deck. A running system.</h2>
+  </div>
+  <div class="included-grid">
+    <div class="included">
+      <div class="kicker"><span class="dot"></span>Included</div>
+      <h4>Executive education</h4>
+      <p>Two workshops in month one, plus weekly office hours all year. Your leadership actually understands what's being built and why.</p>
+    </div>
+    <div class="included">
+      <div class="kicker"><span class="dot"></span>Included</div>
+      <h4>Process + data audit</h4>
+      <p>Every workflow scored, every data source mapped, every system inventoried. Ranked, ready to build.</p>
+    </div>
+    <div class="included">
+      <div class="kicker"><span class="dot"></span>Included</div>
+      <h4>Four production workflows</h4>
+      <p>Built end-to-end and deployed into real teams. Not proofs of concept - things people use on Monday morning.</p>
+    </div>
+    <div class="included">
+      <div class="kicker"><span class="dot"></span>Included</div>
+      <h4>Team training and change management</h4>
+      <p>Two training waves, per-workflow playbooks, recorded library. Teams operate the workflows, question them, and push back when they're wrong.</p>
+    </div>
+    <div class="included">
+      <div class="kicker"><span class="dot"></span>Included</div>
+      <h4>Governance and measurement</h4>
+      <p>Approval rules, incident response, kill switches, and a boardroom dashboard that survives a CFO question.</p>
+    </div>
+    <div class="included">
+      <div class="kicker"><span class="dot"></span>Included</div>
+      <h4>Center of Excellence + handoff</h4>
+      <p>An internal champion cohort takes ownership. Runbooks documented. We move to support role. The program keeps running.</p>
+    </div>
+  </div>
+</section>
+
+<span class="keyline"></span>
+
+<section id="who">
+  <div class="head">
+    <div class="section-label"><span>07</span><span>&middot;</span><span>Fit check</span></div>
+    <h2>Who this is for.</h2>
+  </div>
+  <div class="who">
+    <div class="col yes">
+      <h3>You'll get a lot out of this if <em>you fit</em>.</h3>
+      <ul>
+        <li>You're a large company (typically 200+ employees, but not a hard rule)</li>
+        <li>You've watched competitors adopt AI and don't want to be behind again</li>
+        <li>An executive sponsor is willing to commit real time, not just a budget line</li>
+        <li>You'd rather ship four workflows than admire twenty PowerPoint slides</li>
+        <li>You want the people who built it to teach your team how to run it</li>
+        <li>You're okay with plain talk, not consulting theatre</li>
+      </ul>
+    </div>
+    <div class="col no">
+      <h3>Skip this if <em>any of these are true</em>.</h3>
+      <ul>
+        <li>You want a strategy deck and no execution</li>
+        <li>You want to buy licenses without building the workflows behind them</li>
+        <li>No executive is willing to be publicly accountable for AI outcomes</li>
+        <li>You're looking for "AI-washing" for investor narrative only</li>
+        <li>You need a name-brand consulting firm on the invoice for optics</li>
+        <li>Your organization can't tolerate any AI ever being wrong</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<span class="keyline"></span>
+
+<section id="faq">
+  <div class="head">
+    <div class="section-label"><span>08</span><span>&middot;</span><span>FAQ</span></div>
+    <h2>Straight answers.</h2>
+  </div>
+  <div class="faq">
+    <details>
+      <summary>How much does the program cost?</summary>
+      <p>Depends on your size, scope, and how many departments the workflows touch. We price the audit as a fixed fee, then the build months as a monthly retainer with milestone deliverables. We are direct on cost early - no long dance. Book a conversation and we will give you a range in the first call.</p>
+    </details>
+    <details>
+      <summary>Who actually shows up?</summary>
+      <p>The people who will do the work. You get named workflow builders, a workflow lead, and Joe (as program lead) accountable end-to-end. No junior handoff mid-program. No mystery offshore team behind the scenes.</p>
+    </details>
+    <details>
+      <summary>What tech do you build on?</summary>
+      <p>We are tech-agnostic on principle. In practice: LLM APIs (Anthropic, OpenAI), orchestration (n8n, Zapier, or custom), your existing systems (Salesforce, HubSpot, Google Workspace, Microsoft 365, etc.), and whatever database and dashboard you already run. If you have a preferred stack we honor it. If you don't, we recommend and defend our choice.</p>
+    </details>
+    <details>
+      <summary>How is this different from a Big Four AI practice?</summary>
+      <p>Big Four sells you a beautifully-formatted strategy and a matrixed team. The strategy is often good. The execution rarely arrives on time or works the way the strategy claimed. We only sell working systems that our team stays with through deployment. Fewer slides, more shipped workflows.</p>
+    </details>
+    <details>
+      <summary>What if we already have AI initiatives running?</summary>
+      <p>Then we do not overwrite them. Month two's process mapping includes everything you have already built. If your existing initiatives are working, we help scale them. If they are stuck, we help unstick them. Sometimes the honest answer is: keep going, we are not adding value. We will say that.</p>
+    </details>
+    <details>
+      <summary>Can we start with the six-month version and extend?</summary>
+      <p>Yes. That's how many clients start. The six-month program is designed to give you a fully defensible answer on whether to extend, without you having committed to the full year upfront.</p>
+    </details>
+    <details>
+      <summary>How do you measure success?</summary>
+      <p>We agree on specific, boring metrics before we start. Hours returned per team per week. Dollars saved per workflow per month. Customer NPS delta on any customer-facing workflow. Workflow uptime. Adoption rate on the pilot teams. If we cannot measure it, we cannot claim it.</p>
+    </details>
+    <details>
+      <summary>Will you sign an NDA and handle sensitive data?</summary>
+      <p>Yes on NDA. Yes on standard enterprise data-handling: SOC-adjacent controls, PII redaction where appropriate, access logs on our end, and vendor security review is welcomed. We do not train models on your data unless you specifically ask us to.</p>
+    </details>
+  </div>
+</section>
+
+<div class="final">
+  <div class="final-inner">
+    <div class="kicker">The program starts with a conversation</div>
+    <h2>Twelve months from now, someone else's <em>company</em> runs on AI. Yours could.</h2>
+    <p>Thirty minutes with Joe. We tell you honestly whether the program fits, and what phase one would look like for your organization. No slide deck, no upsell.</p>
+    <div class="row">
+      <a class="btn primary" href="mailto:joe@getnifty.xyz?subject=Nifty AI Program - Book a conversation">Book a conversation <span class="arrow">&rarr;</span></a>
+      <a class="btn ghost" href="https://getnifty.xyz" target="_blank" rel="noopener">See GetNifty</a>
+    </div>
+  </div>
+</div>
+
+<footer class="foot">
+  <div>&copy; <span id="year"></span> The Nifty AI Program &middot; a program from <a href="https://getnifty.xyz" target="_blank" rel="noopener">GetNifty</a></div>
+  <div>
+    <a href="mailto:joe@getnifty.xyz">joe@getnifty.xyz</a>
+    &nbsp;&middot;&nbsp;
+    <a href="/scope/">Try Nifty Scope free</a>
+    &nbsp;&middot;&nbsp;
+    <a href="/">Brand Hub</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
