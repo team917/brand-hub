@@ -36,3 +36,24 @@
   from = "/scope-classic/start"
   to = "/scope-classic/start.html"
   status = 200
+
+# Nifty Scope Deep (full 50-practice audit)
+[[redirects]]
+  from = "/scope-deep/start"
+  to = "/scope-deep/start.html"
+  status = 200
+
+[[redirects]]
+  from = "/scope-deep/app"
+  to = "/scope-deep/start.html"
+  status = 200
+
+[[redirects]]
+  from = "/deep"
+  to = "/scope-deep/"
+  status = 200
+
+[[redirects]]
+  from = "/audit"
+  to = "/scope-deep/"
+  status = 200
